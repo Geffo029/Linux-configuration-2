@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+
+<labwc_config>
+
+	<keyboard>
+		<default />
+		<keybind key="W-t">
+			<action name="Execute" command="foot" />
+		</keybind>
+		<keybind key="W-f">
+			<action name="Execute" command="firefox-esr" />
+		</keybind>
+
+	</keyboard>
+
+</labwc_config>

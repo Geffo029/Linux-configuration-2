@@ -1,0 +1,10 @@
+configuration {
+	modi: "window,drun,ssh,combi";
+	combi-modi: "window,drun,ssh";
+	font: "monospace 18";
+	show-icons: true;
+}
+
+@theme "/usr/share/rofi/themes/Monokai.rasi"
+
+

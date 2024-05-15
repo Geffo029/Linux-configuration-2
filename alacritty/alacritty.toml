@@ -1,0 +1,99 @@
+[colors]
+draw_bold_text_with_bright_colors = true
+
+[colors.primary]
+background = "#1d1f21"
+foreground = "#f0efec"
+
+[colors.bright]
+black = "#6c6c6c"
+blue = "#51a1ff"
+cyan = "#4fd2fd"
+green = "#57e389"
+magenta = "#c061cb"
+red = "#ed333b"
+white = "#f6f5f4"
+yellow = "#f8e45c"
+
+[colors.cursor]
+# Cursor colors
+#
+# Colors which should be used to draw the terminal cursor.
+#
+# Allowed values are CellForeground/CellBackground, which reference the
+# affected cell, or hexadecimal colors like #ff00ff.
+cursor = "#dc322f"
+text = "CellBackground"
+
+[colors.normal]
+black = "#1b1a23"
+blue = "#1e78e4"
+cyan = "#15b5e1"
+green = "#2ec27e"
+magenta = "#9841bb"
+red = "#c01c28"
+white = "#f0efec"
+yellow = "#f5c211"
+
+[colors.selection]
+# Selection colors
+#
+# Colors which should be used to draw the selection area.
+#
+# Allowed values are CellForeground/CellBackground, which reference the
+# affected cell, or hexadecimal colors like #ff00ff.
+background = "CellForeground"
+text = "CellBackground"
+
+[cursor]
+thickness = 0.3
+vi_mode_style = "Block"
+
+[cursor.style]
+blinking = "On"
+shape = "Underline"
+
+[font]
+#size = 12
+
+[font.glyph_offset]
+x = 0
+y = 0
+
+[font.normal]
+family = "monospace"
+style = "Regular"
+
+[font.offset]
+x = -1
+y = -2
+
+[[keyboard.bindings]]
+action = "ScrollLineUp"
+key = "Up"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "ScrollLineDown"
+key = "Down"
+mods = "Shift"
+
+#[[keyboard.bindings]]
+#action = "CreateNewWindow"
+#key = "T"
+#mods = "Control"
+
+[scrolling]
+history = 2000
+
+[window]
+dynamic_title = true
+opacity = 0.9
+
+[window.padding]
+x = 1
+y = 1
+
+[window.dimensions]
+lines = 30
+columns = 110

@@ -1,0 +1,83 @@
+# See dunst(5) for all configuration options
+
+[global]
+	### Geometry ###
+
+	# dynamic width from 0 to 300
+	# width = (0, 300)
+	# constant width of 300
+	width = 200
+
+	# The maximum height of a single notification, excluding the frame.
+	height = 500
+
+	# Position the notification in the top right corner
+	origin = bottom-right
+
+	# Offset from the origin
+	offset = 12x37
+
+	# Scale factor. It is auto-detected if value is 0.
+	scale = 0
+
+	# Maximum number of notification (0 means no limit)
+	notification_limit = 5
+
+	### Progress bar ###
+
+	# Turn on the progess bar. It appears when a progress hint is passed with
+	# for example dunstify -h int:value:12
+	progress_bar = true
+
+	# Set the progress bar height. This includes the frame, so make sure
+	# it's at least twice as big as the frame width.
+	progress_bar_height = 10
+
+	# Set the frame width of the progress bar
+	progress_bar_frame_width = 1
+
+	# Set the minimum width for the progress bar
+	progress_bar_min_width = 150
+
+	# Set the maximum width for the progress bar
+	progress_bar_max_width = 300
+
+	# Corner radius for the progress bar. 0 disables rounded corners.
+	progress_bar_corner_radius = 0
+
+	# Corner radius for the icon image.
+	icon_corner_radius = 0
+
+	# Show how many messages are currently hidden (because of
+	# notification_limit).
+	indicate_hidden = yes
+
+	# The transparency of the window.  Range: [0; 100].
+	# This option will only work if a compositing window manager is
+	# present (e.g. xcompmgr, compiz, etc.). (X11 only)
+	transparency = 0
+
+	# Draw a line of "separator_height" pixel height between two
+	# notifications.
+	# Set to 0 to disable.
+	# If gap_size is greater than 0, this setting will be ignored.
+	separator_height = 2
+
+	# Padding between text and separator.
+	padding = 5 
+
+	frame_width = 2
+
+[urgency_low]
+	frame_color = "#69C924"
+	foreground = "#FFFFFF"
+	background = "#111111"
+	timeout = 3
+
+[stack-volumes]
+	appname = "volume_notify"
+	#iwidth = 15
+	set_stack_tag = "volume"
+[stack-brightnesses]
+	appname = "brightness_notify"
+	set_stack_tag = "brightness"

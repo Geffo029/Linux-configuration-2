@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+
+<!--
+  This is a very simple config file with many options missing. For a complete
+  set of options with comments, see docs/rc.xml.all
+-->
+
+<labwc_config>
+
+	<theme>
+		<name></name>
+		<cornerRadius>8</cornerRadius>
+		<font name="monospace" size="11" />
+		<!-- <font name="sans" size="13" /> -->
+	</theme>
+	<!-- <desktops number="4" / -->> 
+	<desktops>  
+	 	<names>
+			<name>1</name>
+			<name>2</name>
+ 			<name>3</name>
+			<name>4</name>
+		</names>
+	</desktops>
+	<keyboard>
+		<default />
+		<keybind key="C-W-Right">
+      			<action name="GoToDesktop" to="right" wrap="no" />
+    		</keybind>
+		<keybind key="C-W-Left">
+			<action name="GoToDesktop" to="left" wrap="no" />
+		</keybind>
+		<keybind key="S-W-Right">
+			<action name="SendToDesktop" to="right" wrap="no" />
+		</keybind>
+		<keybind key="S-W-Left">
+			<action name="SendToDesktop" to="left" wrap="no" />
+		</keybind>
+		<keybind key="W-d">
+			<action name="ForEach">
+				<query />
+					<then><action name="Iconify" /></then>
+			</action>
+			<!-- <action name="ToggleShowDesktop" />-->
+		</keybind>
+		<keybind key="A-Up" />
+		<keybind key="A-Down" />
+		<keybind key="A-Left" />
+		<keybind key="A-Right" />
+		<keybind key="W-a" />
+		<keybind key="W-Up" />
+		<keybind key="W-Up">
+			<action name="ToggleMaximize" />
+		</keybind>
+		<keybind key="W-Down" />
+		<keybind key="W-Down">
+			<action name="Iconify" />
+		</keybind>
+		<keybind key="A-q">
+			<action name="Close" />
+		</keybind>
+		<keybind key="A-F4" />
+		<keybind key="A-F4">
+			<action name="Kill" />
+		</keybind>
+
+		<!-- Program shortcuts -->
+		<keybind key="W-Space">
+			<action name="Execute" command="wofi --show drun" />
+		</keybind>
+		<keybind key="W-t">
+			<action name="Execute" command="foot" />
+		</keybind>
+		<keybind key="W-e">
+			<action name="Execute" command="thunar" />
+		</keybind>
+		<keybind key="W-f">
+			<action name="Execute" command="firefox" />
+		</keybind>
+
+		<!--
+		Remove a previously defined keybind
+		A shorter alternative is <keybind key="W-F4" />
+		-->
+		<keybind key="W-F4">
+			<action name="None" />
+		</keybind>
+	</keyboard>
+
+	<mouse>
+		<default />
+		<scrollFactor>0.6</scrollFactor>
+
+		<!-- Show a custom menu on desktop right click -->
+		<context name="Root">
+			<mousebind button="Right" action="Press">
+				<action name="ShowMenu" menu="some-custom-menu" />
+			</mousebind>
+		</context>
+		<context name="Frame">
+			<mousebind button="W-Left" action="Drag">
+				<action name="Move" />
+			</mousebind>
+			<mousebind button="W-Right" action="Drag">
+				<action name="Resize" />
+			</mousebind>
+		</context>
+	</mouse>
+
+	<libinput>
+		<device category="touchpad">
+			<pointerSpeed>0.1</pointerSpeed>
+			<naturalScroll>yes</naturalScroll>
+		</device>
+	</libinput>
+
+</labwc_config>

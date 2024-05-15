@@ -1,0 +1,262 @@
+input "type:keyboard" {
+	xkb_layout it
+}
+input "type:touchpad" {
+	tap enabled
+	natural_scroll enabled
+}
+output eDP-1 scale 1.5
+output eDP-1 bg ~/Pictures/wallpapers/aurumek\ 4.jpg fill
+workspace 1 output eDP-1
+workspace 2 output eDP-1
+workspace 3 output eDP-1
+workspace 4 output eDP-1
+
+
+set $Win Mod4
+set $Alt Mod1
+
+set $terminal foot
+set $explorer thunar
+set $browser firefox
+#set $menu dmenu_path | wmenu | xargs swaymsg exec --
+set $menu tofi-drun --drun-launch=true
+
+#set $Lock i3lock --image $(. $HOME/.config/i3/screenshot_lock.sh)
+#set $refresh_i3status killall -SIGUSR1 i3status
+
+# Define names for default workspaces for which we configure key bindings later on.
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+exec swayidle -w \
+          timeout 300 'swaylock -f -c 000000' \
+          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+          before-sleep 'swaylock -f -c 000000'
+
+#exec swaybg --image ~/Pictures/wallpapers/aurumek\ 5.jpg
+
+# exec --no-startup-id xinput --set-prop 11 186 1.5, 0.0, 0.0, 0.0, 1.5, 0.0, 0.0, 0.0, 1.0
+
+#Si può anche lanciare in altro modo https://wiki.archlinux.org/title/Desktop_notifications#Notification_servers
+exec "dunst"
+exec "picom"
+
+bindsym XF86AudioRaiseVolume  exec $HOME/.local/bin/set_volume.sh up
+bindsym XF86AudioLowerVolume  exec $HOME/.local/bin/set_volume.sh down
+bindsym XF86AudioMute         exec $HOME/.local/bin/set_volume.sh mute
+bindsym XF86MonBrightnessUp   exec $HOME/.local/bin/set_brightness.sh up
+bindsym XF86MonBrightnessDown exec $HOME/.local/bin/set_brightness.sh down
+bindsym Print                 exec --no-startup-id  "flameshot gui"
+
+# reload the configuration file
+bindsym $Alt+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $Alt+Shift+r restart
+
+bindsym $Win+Left  focus left
+bindsym $Win+Down  focus down
+bindsym $Win+Up    focus up
+bindsym $Win+Right focus right
+bindsym $Alt+g focus mode_toggle
+bindsym $Alt+q kill
+bindsym $Alt+f fullscreen toggle
+bindsym $Alt+space floating toggle
+
+bindsym $Alt+h splith
+bindsym $Alt+v splitv
+
+# change container layout (stacked, tabbed, toggle split)
+#bindsym $Alt+Shift+s layout stacking
+#bindsym $Alt+Shift+w layout tabbed
+#bindsym $Alt+Shift+e layout toggle split
+
+# focus the parent container and focus child container
+bindsym $Alt+a focus parent
+bindsym $Alt+d focus child
+
+bindsym $Win+t exec $terminal
+bindsym $Win+e exec $explorer
+bindsym $Win+f exec $browser
+bindsym $Win+space exec env TERMINAL=$terminal $menu
+#bindsym $Win+Tab   exec --no-startup-id "rofi -show window"
+#bindsym $Win+s     exec --no-startup-id ". $HOME/.config/i3/settings.sh alacritty"
+
+
+bindsym $Win+1 workspace number $ws1
+bindsym $Win+2 workspace number $ws2
+bindsym $Win+3 workspace number $ws3
+bindsym $Win+4 workspace number $ws4
+bindsym $Win+5 workspace number $ws5
+bindsym $Win+6 workspace number $ws6
+bindsym $Win+7 workspace number $ws7
+bindsym $Win+8 workspace number $ws8
+bindsym $Win+9 workspace number $ws9
+bindsym $Win+0 workspace number $ws10
+bindsym $Win+Control+Right workspace next
+bindsym $Win+Control+Left  workspace prev
+
+bindsym $Win+Shift+1 move container to workspace number $ws1; workspace number $ws1
+bindsym $Win+Shift+2 move container to workspace number $ws2; workspace number $ws2
+bindsym $Win+Shift+3 move container to workspace number $ws3; workspace number $ws3
+bindsym $Win+Shift+4 move container to workspace number $ws4; workspace number $ws4
+bindsym $Win+Shift+5 move container to workspace number $ws5; workspace number $ws5
+bindsym $Win+Shift+6 move container to workspace number $ws6; workspace number $ws6
+bindsym $Win+Shift+7 move container to workspace number $ws7; workspace number $ws7
+bindsym $Win+Shift+8 move container to workspace number $ws8; workspace number $ws8
+bindsym $Win+Shift+9 move container to workspace number $ws9; workspace number $ws9
+bindsym $Win+Shift+0 move container to workspace number $ws10; workspace number $ws10
+bindsym $Win+Shift+Right move container to workspace next; workspace next
+bindsym $Win+Shift+Left  move container to workspace prev; workspace prev
+
+
+focus_follows_mouse no
+# Use Mouse+$Alt to drag floating windows to their wanted position
+floating_modifier $Alt normal
+# move tiling windows via drag & drop by left-clicking into the title bar,
+# or left-clicking anywhere into the window while holding the floating modifier.
+tiling_drag modifier
+
+
+for_window [window_role="About"] floating enable
+for_window [window_role="Organizer"] floating enable
+for_window [window_role="Preferences"] floating enable
+for_window [window_role="bubble"] floating enable
+for_window [window_role="page-info"] floating enable
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [window_role="toolbox"] floating enable
+for_window [window_role="webconsole"] floating enable
+for_window [window_type="dialog"] floating enable
+for_window [window_type="menu"] floating enable
+
+for_window [title="Settings"] floating enable
+
+
+font pango:monospace 10
+#font monospace 10
+
+gaps outer 4
+gaps inner 8
+
+# smart_borders no_gaps
+# smart_borders on
+default_border pixel 2
+default_floating_border normal
+
+# Colors                border    backgr.   text    indicator child_border
+client.focused          #69c924   #69c924   #000000 #B9FF74   #69c924
+client.focused_inactive #69c92488 #69c92488 #000000 #B9FF7488 #69c92488
+client.unfocused        #222222   #222222   #888888 #FF0000   #111111
+client.urgent           #2f343a   #900000   #ffffff #900000   #900000
+# DEFAULT                 
+# client.focused          #4c7899 #285577 #ffffff #2e9ef4   #285577
+# client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
+# client.unfocused        #333333 #222222 #888888 #292d2e   #222222
+# client.urgent           #2f343a #900000 #ffffff #900000   #900000
+# client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+# Note that for the window decorations, the color around the child window is the "child_border", 
+# and "border" color is only the two thin lines around the titlebar.
+
+
+bindgesture swipe:right workspace prev
+bindgesture swipe:left workspace next
+
+set $mode_move_window Move window: (Left) | (Right) | (Up) | (Down)
+mode "$mode_move_window" {
+	bindsym Left  move left
+	bindsym Down  move down
+	bindsym Up    move up
+	bindsym Right move right
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+	bindsym $Alt+m mode "default"
+}
+bindsym $Alt+m mode "$mode_move_window"
+
+set $mode_resize_window Resize window: (Right) width++ | (Left) width-- | (Up) height++ | (Down) height--
+mode "$mode_resize_window" {
+	# These bindings trigger as soon as you enter the resize mode
+	bindsym Right resize grow width    20 px or 5 ppt
+	bindsym Left  resize shrink width  20 px or 5 ppt
+	bindsym Up    resize grow height   20 px or 5 ppt
+	bindsym Down  resize shrink height 20 px or 5 ppt
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+	bindsym $Alt+r mode "default"
+}
+bindsym $Alt+r mode "$mode_resize_window"
+
+set $mode_windows_layout Windows layout: (w) splitted [toggle] | (t) tabbed | (s) stacked
+mode "$mode_windows_layout" {
+	bindsym w layout toggle split
+	bindsym t layout tabbed
+	bindsym s layout stacking
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+	bindsym $Alt+l mode "default"
+
+}
+bindsym $Alt+l mode "$mode_windows_layout"
+
+# Si potrebbe fare con ROFI
+set $mode_system System: (l) Lock | (o) Logout | (s) Suspend | (p) Poweroff | (r) Restart
+mode "$mode_system" {
+	bindsym l exec --no-startup-id loginctl lock-session, mode "default"
+	bindsym o exec sway exit
+	bindsym s exec --no-startup-id systemctl suspend, mode "default"
+	bindsym p exec --no-startup-id systemctl poweroff, mode "default"
+	bindsym r exec --no-startup-id systemctl reboot, mode "default"
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+	bindsym $Alt+Control+Delete mode "default"
+}
+bindsym $Alt+Control+Delete mode "$mode_system"
+
+
+bar {
+	swaybar_command waybar
+}
+bar {
+    position top
+    workspace_buttons no
+    #hidden_state show
+    mode overlay
+    # When the status_command prints a new line to stdout, swaybar updates.
+    # The default just shows the current date and time.
+    #status_command while date +'%Y-%m-%d %X'; do sleep 1; done
+   
+    colors {
+        statusline #ffffff
+        background #32323200
+        inactive_workspace #32323200 #32323200 #5c5c5c
+    }
+}
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+#bar {
+#	status_command i3blocks
+#
+#	font pango: monospace 10.5
+#	strip_workspace_numbers yes
+#	workspace_buttons yes
+#	padding -1 3 0 0
+#	tray_padding 1 
+#	colors {
+#		statusline #ffffff
+#		background #111111
+#		# Class            border    backgr. text
+#		focused_workspace  #69c924AA #69c924 #000000
+#		inactive_workspace #333333   #222222 #888888
+#		binding_mode      #69c924   #69c924 #000000 
+#	}
+#}
+

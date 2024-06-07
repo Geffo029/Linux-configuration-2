@@ -16,7 +16,7 @@ swaybg -c '#113344' >/dev/null 2>&1 &
 #     output HDMI-A-1 position 1366,0
 #     output eDP-1 position 0,0
 #   }
-kanshi >/dev/null 2>&1 &
+# kanshi >/dev/null 2>&1 &
 
 # Launch a panel such as yambar or waybar.
 waybar >/dev/null 2>&1 &
@@ -34,9 +34,9 @@ mako >/dev/null 2>&1 &
 # (since a837fef). Instead use a wlr-output-power-management client such as
 # https://git.sr.ht/~leon_plickat/wlopm
 swayidle -w \
-	timeout 300 'swaylock -f -c 000000' \
-	timeout 600 'wlopm --off \*' \
+	timeout 300 'swaylock -f -c 113344' \
+	timeout 330 'wlopm --off \*' \
 	resume 'wlopm --on \*' \
-	before-sleep 'swaylock -f -c 000000' >/dev/null 2>&1 &
+	before-sleep 'swaylock -f -c 113344' >/dev/null 2>&1 &
 
 

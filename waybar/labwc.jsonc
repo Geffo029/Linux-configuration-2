@@ -1,7 +1,7 @@
 {
     "layer": "top", // Waybar at top layer
     // "position": "bottom", // Waybar position (top|bottom|left|right)
-    "height": 34, // Waybar height (to be removed for auto height)
+    "height": 32, // Waybar height (to be removed for auto height)
     // "width": 1280, // Waybar width
     "spacing": 8, // Gaps between modules (4px)
     // Choose the order of the modules
@@ -14,9 +14,11 @@
 
     "modules-right": [
         "tray",
-        "group/hardware",
+        "group/hardware-info",
+	"idle_inhibitor",
         "privacy",
-        "pulseaudio",
+        "bluetooth",
+	"pulseaudio",
         "network",
         "backlight",
         "battery"
@@ -24,7 +26,7 @@
 
     "wlr/taskbar": {
         "format": "{icon}",
-        "icon-size": 22,
+        "icon-size": 20,
         // "icon-theme": "Numix-Circle",
         "tooltip-format": "{title}",
         "on-click": "minimize-raise"
@@ -45,24 +47,24 @@
     },
 
     "tray": {
-        "icon-size": 22,
+        "icon-size": 20,
         "spacing": 10
     },
 
-    "group/hardware": {
-        "modules": ["custom/handle", "cpu", "memory", "disk", "temperature"],
+    "group/hardware-info": {
+        "modules": ["custom/handle-info", "cpu", "memory", "disk", "temperature"],
         "drawer": {
-            "transition-duration": 250,
-            "children-class": "hardware",
+            "transition-duration": 500,
+            "children-class": "hardware-items",
             "transition-left-to-right": false
         },
         "orientation": "inherit"
     },
 
-    "custom/handle": {
-        "format": "",
-        "tooltip": false,
-        "on-click": "foot -e htop"
+    "custom/handle-info": {
+        "format": " ",
+        "tooltip": false
+        // "on-click": "foot -e htop"
     },
 
     "cpu": {
@@ -84,12 +86,55 @@
     "temperature": {
         // "thermal-zone": 2,
         // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
-        // "critical-threshold": 80,
+        "critical-threshold": 80,
         "format": "{temperatureC}°C",
         "format-critical": "!{temperatureC}°C"
     },
 
-    "pulseaudio": {
+     "privacy": {
+        "icon-spacing": 4,
+        "icon-size": 15,
+        "transition-duration": 250,
+        "modules": [
+            {
+                "type": "screenshare",
+                "tooltip": true,
+                "tooltip-icon-size": 20
+            },
+            {
+                "type": "audio-out",
+                "tooltip": true,
+                "tooltip-icon-size": 20
+            },
+            {
+                "type": "audio-in",
+                "tooltip": true,
+                "tooltip-icon-size": 20
+            }
+    	]
+    },
+
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+
+    "bluetooth": {
+        // "controller": "controller1", // specify the alias of the controller if there are more than 1 on the system
+        // "format": "<U+F294> {status}",
+        "format-disabled": "",
+        "format-on": "",
+        // "format-disabled": "", // an empty format will hide the module
+        // "format-connected": "<U+F294> {num_connections} connected",
+        // "tooltip-format": "{controller_alias}\t{controller_address}",
+        "tooltip-format-connected": "Alias: {controller_alias}\nAddress: {controller_address}\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}"
+    },
+
+   "pulseaudio": {
         "format": "{icon}",
         "format-bluetooth": "{icon}",
         "format-muted": "",
@@ -100,63 +145,26 @@
         },
     // "smooth-scrolling-threshold": 0.1,
         "scroll-step": 0.2,
-        "on-click": "pavucontrol",
+        "on-click": "foot -e pulsemixer",
         "ignored-sinks": ["Easy Effects Sink"],
         "tooltip-format": "{desc}\nOutput: {volume}%\nInput: {format_source}"
     },
 
-    "privacy": {
-    "icon-spacing": 4,
-    "icon-size": 15,
-    "transition-duration": 250,
-    "modules": [
-        {
-            "type": "screenshare",
-            "tooltip": true,
-            "tooltip-icon-size": 20
-        },
-        {
-            "type": "audio-out",
-            "tooltip": true,
-            "tooltip-icon-size": 20
-        },
-        {
-            "type": "audio-in",
-            "tooltip": true,
-            "tooltip-icon-size": 20
-        }
-    ]
-    },
-
-    "wireplumber": {
-        // "format": "{volume}% {icon}",
-    "states": {
-        "zero": 0,
-        "low": 50,
-        "high": 100
-    },
-        "format-muted": "",
-    "format-zero": "",
-    "format-low": "",
-    "format-high": "",
-        "on-click": "helvum"
-        // "format-icons": ["", "", ""]
-    },
-
     "network": {
-    "interval": 2,
+        "interval": 2,
         "format": "{ifname}",
         "format-wifi": "",
         "format-ethernet": "",
         "format-disconnected": "!",
         "tooltip-format": "{ifname}",
         "tooltip-format-wifi": "{ifname} (wireless)\nNetwork: {essid}\nSignal strenght: {signalStrength}% ({signaldBm}dBm)\nDownload: {bandwidthDownBytes} | Upload: {bandwidthUpBytes}",
-        "tooltip-format-ethernet": "{ifname} (wired)\nNetwork: {essid}\nSignal strenght: {signalStrength}% ({signaldBm}dBm)\nDownload: {bandwidthDownBytes} | Upload: {bandwidthUpBytes}",
-        "tooltip-format-disconnected": "Disconnected"
+        "tooltip-format-ethernet": "{ifname} (wired)\nDownload: {bandwidthDownBytes} | Upload: {bandwidthUpBytes}",
+        "tooltip-format-disconnected": "Disconnected",
+	"on-click": "foot -e nmtui"
     },
 
     "backlight": {
-        "format": " {icon}",
+        "format": "",
         // "format-icons": ["▁", "▂", "▄","▆", "█"],
         "tooltip-format": "Brightness: {percent}%"
     },
@@ -167,8 +175,9 @@
             "warning": 30,
             "critical": 15
         },
+	"format": "{icon}",
         "format-plugged": " {icon}",
-        "format-discharging": "{icon}",
+        // "format-discharging": "{icon}",
         "format-discharging-critical": "!{icon}",
         "format-icons": ["", "", "", "", ""],
         "max-length": 25,

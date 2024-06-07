@@ -8,9 +8,10 @@
 <labwc_config>
 
 	<theme>
-		<name></name>
+		<name>Adapta-Nokto</name>
 		<cornerRadius>8</cornerRadius>
-		<font name="monospace" size="11" />
+		<font name="monospace" size="9" />
+		<dropShadows>yes</dropShadows>
 		<!-- <font name="sans" size="13" /> -->
 	</theme>
 	<!-- <desktops number="4" / -->> 
@@ -89,7 +90,7 @@
 
 	<mouse>
 		<default />
-		<scrollFactor>0.6</scrollFactor>
+		<scrollFactor>0.5</scrollFactor>
 
 		<!-- Show a custom menu on desktop right click -->
 		<context name="Root">

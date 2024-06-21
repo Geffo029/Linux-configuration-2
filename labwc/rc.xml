@@ -6,7 +6,12 @@
 -->
 
 <labwc_config>
+	<core>
+		<adaptiveSync>yes</adaptiveSync>
+	</core>
 
+	<margin top="0" bottom="0" left="0" right="0" />
+	
 	<theme>
 		<name>Adapta-Nokto</name>
 		<cornerRadius>8</cornerRadius>
@@ -14,6 +19,7 @@
 		<dropShadows>yes</dropShadows>
 		<!-- <font name="sans" size="13" /> -->
 	</theme>
+	
 	<!-- <desktops number="4" / -->> 
 	<desktops>  
 	 	<names>
@@ -23,6 +29,17 @@
 			<name>4</name>
 		</names>
 	</desktops>
+	
+	<snapping>
+		<range>10</range>
+		<overlay>
+			<delay>
+				<inner>200</inner>
+				<outer>200</outer>
+			</delay>
+		</overlay>
+	</snapping>
+	
 	<keyboard>
 		<default />
 		<keybind key="C-W-Right">
@@ -67,7 +84,8 @@
 
 		<!-- Program shortcuts -->
 		<keybind key="W-Space">
-			<action name="Execute" command="wofi --show drun" />
+			<!-- <action name="Execute" command="wofi - -show drun" /> -->
+			<action name="Execute" command="tofi-drun --drun-launch=true" />
 		</keybind>
 		<keybind key="W-t">
 			<action name="Execute" command="foot" />
@@ -90,12 +108,15 @@
 
 	<mouse>
 		<default />
-		<scrollFactor>0.5</scrollFactor>
+		<scrollFactor>1</scrollFactor>
 
 		<!-- Show a custom menu on desktop right click -->
 		<context name="Root">
 			<mousebind button="Right" action="Press">
 				<action name="ShowMenu" menu="some-custom-menu" />
+			</mousebind>
+			<mousebind button="Left" action="Press">
+				<action />
 			</mousebind>
 		</context>
 		<context name="Frame">

@@ -1,7 +1,8 @@
 # Example autostart file
 
 
-wlr-randr --output eDP-1 --scale 1.5 &
+#wlr-randr --output eDP-1 --scale 1.5 &
+kanshi &
 
 /usr/libexec/pipewire-launcher &
 
@@ -26,6 +27,8 @@ waybar >/dev/null 2>&1 &
 # through the org.freedesktop.Notifications D-Bus API and require a client such
 # as mako to function correctly. Thunderbird is an example of this.
 mako >/dev/null 2>&1 &
+
+tail -f /tmp/wobpipe | wob &
 
 # Lock screen after 5 minutes; turn off display after another 5 minutes.
 #

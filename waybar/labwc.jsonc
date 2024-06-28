@@ -63,8 +63,8 @@
 
     "custom/handle-info": {
         "format": "",
-        "tooltip": false
-        // "on-click": "foot -e htop"
+        "tooltip": false,
+        "on-click": "foot -e htop"
     },
 
     "cpu": {
@@ -137,11 +137,12 @@
    "pulseaudio": {
         "format": "{icon}",
         "format-bluetooth": "{icon}",
-        "format-muted": "",
+        // "format-muted": "",
+        "format-muted": "",
         "format-icons": {
             "headphone": "",
             "phone": "",
-            "default": ["", "", ""]
+            "default": ["", "", ""]
         },
     // "smooth-scrolling-threshold": 0.1,
         "scroll-step": 0.2,

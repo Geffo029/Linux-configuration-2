@@ -1,35 +1,32 @@
 <?xml version="1.0"?>
-
 <!--
   This is a very simple config file with many options missing. For a complete
   set of options with comments, see docs/rc.xml.all
 -->
-
 <labwc_config>
 	<core>
 		<adaptiveSync>yes</adaptiveSync>
 	</core>
-
-	<margin top="0" bottom="0" left="0" right="0" />
-	
+	<margin top="0" bottom="0" left="0" right="0"/>
 	<theme>
 		<name>Adapta-Nokto</name>
 		<cornerRadius>8</cornerRadius>
-		<font name="monospace" size="9" />
+		<font name="monospace" size="9"/>
 		<dropShadows>yes</dropShadows>
 		<!-- <font name="sans" size="13" /> -->
 	</theme>
-	
-	<!-- <desktops number="4" / -->> 
-	<desktops>  
-	 	<names>
+	<!-- <desktops number="4" / -->&gt; 	
+	<desktops>
+		<names>
 			<name>1</name>
 			<name>2</name>
- 			<name>3</name>
+			<name>3</name>
 			<name>4</name>
 		</names>
 	</desktops>
-	
+	<placement>
+		<policy>center</policy>
+	</placement>
 	<snapping>
 		<range>10</range>
 		<overlay>
@@ -39,92 +36,106 @@
 			</delay>
 		</overlay>
 	</snapping>
-	
+
 	<keyboard>
-		<default />
+		<default/>
+		<keybind key="XF86AudioRaiseVolume">
+			<action name="Execute" command="~/.config/labwc/set_volume.sh up" />
+		</keybind>
+		<keybind key="XF86AudioLowerVolume">
+			<action name="Execute" command="~/.config/labwc/set_volume.sh down" />
+		</keybind>
+		<keybind key="XF86AudioMute">
+			<action name="Execute" command="~/.config/labwc/set_volume.sh mute" />
+		</keybind>
+		<keybind key="XF86MonBrightnessUp">
+			<action name="Execute" command="~/.config/labwc/set_brightness.sh up" />
+		</keybind>
+		<keybind key="XF86MonBrightnessDown">
+			<action name="Execute" command="~/.config/labwc/set_brightness.sh down" />
+		</keybind>
 		<keybind key="C-W-Right">
-      			<action name="GoToDesktop" to="right" wrap="no" />
-    		</keybind>
+			<action name="GoToDesktop" to="right" wrap="no"/>
+		</keybind>
 		<keybind key="C-W-Left">
-			<action name="GoToDesktop" to="left" wrap="no" />
+			<action name="GoToDesktop" to="left" wrap="no"/>
 		</keybind>
 		<keybind key="S-W-Right">
-			<action name="SendToDesktop" to="right" wrap="no" />
+			<action name="SendToDesktop" to="right" wrap="no"/>
 		</keybind>
 		<keybind key="S-W-Left">
-			<action name="SendToDesktop" to="left" wrap="no" />
+			<action name="SendToDesktop" to="left" wrap="no"/>
 		</keybind>
 		<keybind key="W-d">
 			<action name="ForEach">
-				<query />
-					<then><action name="Iconify" /></then>
+				<query/>
+				<then>
+					<action name="Iconify"/>
+				</then>
 			</action>
 			<!-- <action name="ToggleShowDesktop" />-->
 		</keybind>
-		<keybind key="A-Up" />
-		<keybind key="A-Down" />
-		<keybind key="A-Left" />
-		<keybind key="A-Right" />
-		<keybind key="W-a" />
-		<keybind key="W-Up" />
+		<keybind key="A-Up"/>
+		<keybind key="A-Down"/>
+		<keybind key="A-Left"/>
+		<keybind key="A-Right"/>
+		<keybind key="W-a"/>
+		<keybind key="W-Up"/>
 		<keybind key="W-Up">
-			<action name="ToggleMaximize" />
+			<action name="ToggleMaximize"/>
 		</keybind>
-		<keybind key="W-Down" />
+		<keybind key="W-Down"/>
 		<keybind key="W-Down">
-			<action name="Iconify" />
+			<action name="Iconify"/>
 		</keybind>
 		<keybind key="A-q">
-			<action name="Close" />
+			<action name="Close"/>
 		</keybind>
-		<keybind key="A-F4" />
+		<keybind key="A-F4"/>
 		<keybind key="A-F4">
-			<action name="Kill" />
+			<action name="Kill"/>
 		</keybind>
-
 		<!-- Program shortcuts -->
 		<keybind key="W-Space">
 			<!-- <action name="Execute" command="wofi - -show drun" /> -->
-			<action name="Execute" command="tofi-drun --drun-launch=true" />
+			<action name="Execute" command="tofi-drun --drun-launch=true"/>
 		</keybind>
 		<keybind key="W-t">
-			<action name="Execute" command="foot" />
+			<action name="Execute" command="foot"/>
 		</keybind>
 		<keybind key="W-e">
-			<action name="Execute" command="thunar" />
+			<action name="Execute" command="thunar"/>
 		</keybind>
 		<keybind key="W-f">
-			<action name="Execute" command="firefox" />
+			<action name="Execute" command="firefox"/>
 		</keybind>
-
 		<!--
 		Remove a previously defined keybind
 		A shorter alternative is <keybind key="W-F4" />
 		-->
 		<keybind key="W-F4">
-			<action name="None" />
+			<action name="None"/>
 		</keybind>
 	</keyboard>
 
 	<mouse>
-		<default />
+		<default/>
 		<scrollFactor>1</scrollFactor>
-
 		<!-- Show a custom menu on desktop right click -->
 		<context name="Root">
 			<mousebind button="Right" action="Press">
-				<action name="ShowMenu" menu="some-custom-menu" />
+				<action name="ShowMenu" menu="some-custom-menu"/>
 			</mousebind>
 			<mousebind button="Left" action="Press">
-				<action />
+				<action/>
 			</mousebind>
 		</context>
 		<context name="Frame">
 			<mousebind button="W-Left" action="Drag">
-				<action name="Move" />
+				<action name="Move"/>
 			</mousebind>
 			<mousebind button="W-Right" action="Drag">
-				<action name="Resize" />
+				<action name="Resize"/>
 			</mousebind>
 		</context>
 	</mouse>
@@ -135,5 +146,4 @@
 			<naturalScroll>yes</naturalScroll>
 		</device>
 	</libinput>
-
 </labwc_config>

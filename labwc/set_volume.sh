@@ -20,7 +20,13 @@ case $COMMAND in
 esac
 
 
-volume=$(wpctl get-volume @DEFAULT_SINK@ | awk '{print $2}')
+#volume=$(wpctl get-volume @DEFAULT_SINK@ | awk '{print $2}')
+read -r volume muted <<< "$(wpctl get-volume @DEFAULT_SINK@ | awk '{print $2, $3}')"
 volume_perc=$(printf "%.0f" $(echo $volume*100 | bc))
 
-echo $volume_perc > /tmp/wobpipe
+if [ $muted = "[MUTED]" ]; then
+	volume_perc=$(echo "$volume_perc+99" | bc)
+fi
+
+#echo $volume_perc > /tmp/wobpipe
+~/.config/labwc/wob_caller.sh $volume_perc

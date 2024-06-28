@@ -13,4 +13,5 @@ esac
 
 brightness_perc=$(brightnessctl -m | awk -F',' '{print $4+0}')
 
-echo $brightness_perc > /tmp/wobpipe
+#echo $brightness_perc > /tmp/wobpipe
+~/.config/labwc/wob_caller.sh $brightness_perc

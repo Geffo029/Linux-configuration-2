@@ -28,7 +28,8 @@ waybar >/dev/null 2>&1 &
 # as mako to function correctly. Thunderbird is an example of this.
 mako >/dev/null 2>&1 &
 
-tail -f /tmp/wobpipe | wob &
+# mkfifo /tmp/wobpipe >/dev/null 2>&1 &
+# tail -f /tmp/wobpipe | wob >/dev/null 2>&1 &
 
 # Lock screen after 5 minutes; turn off display after another 5 minutes.
 #

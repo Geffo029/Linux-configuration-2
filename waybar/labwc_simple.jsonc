@@ -7,6 +7,7 @@
     // Choose the order of the modules
 
     "modules-left": [
+	"wlr/workspaces",
         "wlr/taskbar"
     ],
 
@@ -30,6 +31,22 @@
         // "icon-theme": "Numix-Circle",
         "tooltip-format": "{title}",
         "on-click": "minimize-raise"
+    },
+
+    "wlr/workspaces": {
+        "format": "{icon}",
+	"on-click": "activate",
+	"format-icons": {
+	    "1": "",
+	    "2": "",
+	    "3": "",
+	    "4": "",
+	    "5": "",
+	    "urgent": "",
+	    "active": "",
+	    "default": ""
+	},
+	"sort-by-number": true
     },
 
     "clock": {
@@ -63,7 +80,6 @@
 
     "custom/handle-info": {
         "format": "",
-        //"format": "Resources",
         "tooltip": false,
         "on-click": "foot -e htop"
     },
@@ -71,30 +87,26 @@
     "cpu": {
         "interval": 2,
         "format": " {usage}%"
-        //"format": "CPU {usage}%"
     },
 
     "memory": {
         "interval": 2,
         "format": " {percentage}%",
-        //"format": "RAM {percentage}%",
         "tooltip-format": "Memory used: {used}GiB ({total}GiB total)\nSwap used: {swapUsed}GiB ({swapTotal}GiB total)"
     },
 
     "disk": {
         "interval": 30,
         "format": " {percentage_used}%"
-        //"format": "Disk {percentage_used}%"
     },
 
     "temperature": {
+	"interval": 2,
         // "thermal-zone": 2,
-        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "hwmon-path": "/sys/class/hwmon/hwmon4/temp1_input",
         "critical-threshold": 80,
         "format": " {temperatureC}°C",
-        //"format": "Temperature {temperatureC}°C",
-        "format-critical": "! {temperatureC}°C"
-        //"format-critical": "!Temperature {temperatureC}°C"
+        "format-critical": "!{temperatureC}°C"
     },
 
      "privacy": {
@@ -123,23 +135,16 @@
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
-            "activated": " ON",
-            //"activated": "Idle inhibited",
-            "deactivated": " OFF"
-            //"deactivated": "Idle allowed"
-        },
-	"tooltip-format-activated": "Idle inhibited",
-	"tooltip-format-deactivated": "Idle allowed"
+            "activated": "",
+            "deactivated": ""
+        }
     },
 
     "bluetooth": {
         // "controller": "controller1", // specify the alias of the controller if there are more than 1 on the system
         // "format": "<U+F294> {status}",
-        "format-off": " OFF",
-        "format-disabled": " disabled",
-        //"format-disabled": "Bluetooth OFF",
-        "format-on": " ON",
-        //"format-on": "Bluetooth ON",
+        "format-disabled": "",
+        "format-on": "",
         // "format-disabled": "", // an empty format will hide the module
         // "format-connected": "<U+F294> {num_connections} connected",
         // "tooltip-format": "{controller_alias}\t{controller_address}",
@@ -148,18 +153,17 @@
     },
 
    "pulseaudio": {
-        "format": "{icon} {volume}%",
-        //"format": "Volume {volume}%",
-        // "format-bluetooth": "{icon}",
-        "format-muted": " {volume}%",
-        //"format-muted": "Volume muted ({volume}%)",
+        "format": "{icon}",
+        "format-bluetooth": "{icon}",
+        // "format-muted": "",
+        "format-muted": "",
         "format-icons": {
             "headphone": "",
             "phone": "",
             "default": ["", "", ""]
         },
     // "smooth-scrolling-threshold": 0.1,
-        "scroll-step": 1,
+        "scroll-step": 0.2,
         "on-click": "foot -e pulsemixer",
         "ignored-sinks": ["Easy Effects Sink"],
         "tooltip-format": "{desc}\nOutput: {volume}%\nInput: {format_source}"
@@ -168,22 +172,19 @@
     "network": {
         "interval": 2,
         "format": "{ifname}",
-        "format-wifi": " {signalStrength}%",
-        //"format-wifi": "Internet: WIFI {signalStrength}%",
+        "format-wifi": "",
         "format-ethernet": "",
-        //"format-ethernet": "Internet: ethernet",
         "format-disconnected": "!",
-        //"format-disconnected": "Internet: !no connection",
         "tooltip-format": "{ifname}",
         "tooltip-format-wifi": "{ifname} (wireless)\nNetwork: {essid}\nSignal strenght: {signalStrength}% ({signaldBm}dBm)\nDownload: {bandwidthDownBytes} | Upload: {bandwidthUpBytes}",
         "tooltip-format-ethernet": "{ifname} (wired)\nDownload: {bandwidthDownBytes} | Upload: {bandwidthUpBytes}",
         "tooltip-format-disconnected": "Disconnected",
-	"on-click": "foot -e nmtui"
+	"on-click": "foot -W 60x28 nmtui"
     },
 
     "backlight": {
-        "format": " {percent}%",
-        //"format": "Brightness {percent}%",
+        "format": "",
+        // "format-icons": ["▁", "▂", "▄","▆", "█"],
         "tooltip-format": "Brightness: {percent}%"
     },
 
@@ -193,13 +194,10 @@
             "warning": 30,
             "critical": 15
         },
-	"format": "{icon} {capacity}%",
-	//"format": "Battery {capacity}%",
-        "format-plugged": " {icon} {capacity}%",
-        //"format-plugged": "Battery plugged {capacity}%",
+	"format": "{icon}",
+        "format-plugged": " {icon}",
         // "format-discharging": "{icon}",
-        "format-discharging-critical": "!{icon} {capacity}%",
-        //"format-discharging-critical": "Battery !{capacity}",
+        "format-discharging-critical": "!{icon}",
         "format-icons": ["", "", "", "", ""],
         "max-length": 25,
         "tooltip-format": "Capacity: {capacity}%\nPower draw: {power}W\n{timeTo}"

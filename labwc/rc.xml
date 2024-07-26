@@ -39,6 +39,9 @@
 
 	<keyboard>
 		<default/>
+		<keybind key="C-A-Delete">
+			<action name="Execute" command="~/.config/labwc/logout_tofi.sh" />
+		</keybind>
 		<keybind key="XF86AudioRaiseVolume">
 			<action name="Execute" command="~/.config/labwc/set_volume.sh up" />
 		</keybind>

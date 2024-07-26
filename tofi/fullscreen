@@ -1,7 +1,8 @@
-width = 100%
-height = 100%
-#width = 1494
-#height = 934
+[global]
+#width = 100%
+#height = 100%
+width = 1494
+height = 934
 border-width = 0
 outline-width = 0
 padding-left = 25%

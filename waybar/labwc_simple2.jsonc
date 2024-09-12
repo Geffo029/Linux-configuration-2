@@ -4,22 +4,23 @@
     "height": 26, // Waybar height (to be removed for auto height)
     // "width": 1280, // Waybar width
     "spacing": 8, // Gaps between modules (4px)
-    // Choose the order of the modules
+
 
     "modules-left": [
-	// "wlr/workspaces",
-        "wlr/taskbar"
+	    "wlr/taskbar"
     ],
 
-    "modules-center": [ "clock" ],
+    "modules-center": [ 
+        "clock" 
+    ],
 
     "modules-right": [
         "tray",
         "group/hardware-info",
-	"idle_inhibitor",
+        "idle_inhibitor",
         "privacy",
         "bluetooth",
-	"pulseaudio",
+        "pulseaudio",
         "network",
         "backlight",
         "battery"
@@ -36,18 +37,18 @@
     /*
     "wlr/workspaces": {
         "format": "{icon}",
-	"on-click": "activate",
-	"format-icons": {
-	    "1": "",
-	    "2": "",
-	    "3": "",
-	    "4": "",
-	    "5": "",
-	    "urgent": "",
-	    "active": "",
-	    "default": ""
-	},
-	"sort-by-number": true
+    "on-click": "activate",
+    "format-icons": {
+        "1": "",
+        "2": "",
+        "3": "",
+        "4": "",
+        "5": "",
+        "urgent": "",
+        "active": "",
+        "default": ""
+    },
+    "sort-by-number": true
     },
     */
 
@@ -58,7 +59,6 @@
             "format": {
                 "months": "<span color='#ffead3'><b>{}</b></span>",
                 "days": "<span color='#99ffdd'><b>{}</b></span>",
-                // "weeks": "<span color='#99ffdd'><b>{:%U}</b></span>",
                 "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
                 "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
             }
@@ -111,7 +111,7 @@
         "format-critical": "!{temperatureC}°C"
     },
 
-     "privacy": {
+    "privacy": {
         "icon-spacing": 4,
         "icon-size": 15,
         "transition-duration": 250,
@@ -145,30 +145,43 @@
     "bluetooth": {
         // "controller": "controller1", // specify the alias of the controller if there are more than 1 on the system
         // "format": "<U+F294> {status}",
-        "format-disabled": "",
-        "format-on": "",
-        // "format-disabled": "", // an empty format will hide the module
-        // "format-connected": "<U+F294> {num_connections} connected",
-        // "tooltip-format": "{controller_alias}\t{controller_address}",
-        "tooltip-format-connected": "Alias: {controller_alias}\nAddress: {controller_address}\n{device_enumerate}",
-        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}"
+        "format": "",
+        // "format-on": "",
+        // "format-disabled": "",
+        "format-connected": " ({num_connections})",
+        "tooltip-format": "{controller_alias} ({controller_address})",
+        "tooltip-format-connected": "{controller_alias} ({controller_address})\nConnected:\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias} ({device_address})",
+        // "tooltip-format-connected": "Alias: {controller_alias}\nAddress: {controller_address}\n{device_enumerate}",
+        // "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+        "on-click": "foot -e bluetuith"
     },
 
    "pulseaudio": {
+        "states": {
+            "veryhigh": 200,
+            "high": 100,
+            "low": 50,
+            "zero": 0
+        },
         "format": "{icon}",
+        "format-zero": "",
+        "format-low": "",
+        "format-high": "",
+        "format-veryhigh": "",
         "format-bluetooth": "{icon}",
         // "format-muted": "",
         "format-muted": "",
         "format-icons": {
             "headphone": "",
-            "phone": "",
-            "default": ["", "", ""]
+            "phone": ""
+            // "default": ["", "", ""]
         },
-    // "smooth-scrolling-threshold": 0.1,
+        // "smooth-scrolling-threshold": 0.1,
         "scroll-step": 0.2,
-        "on-click": "foot -e pulsemixer",
         "ignored-sinks": ["Easy Effects Sink"],
-        "tooltip-format": "{desc}\nOutput: {volume}%\nInput: {format_source}"
+        "tooltip-format": "{desc}\nOutput: {volume}%\nInput: {format_source}",
+        "on-click": "foot -e pulsemixer"
     },
 
     "network": {
@@ -176,7 +189,7 @@
         "format": "{ifname}",
         "format-wifi": "",
         "format-ethernet": "",
-        "format-disconnected": "!",
+        "format-disconnected": "",
         "tooltip-format": "{ifname}",
         "tooltip-format-wifi": "{ifname} (wireless)\nNetwork: {essid}\nSignal strenght: {signalStrength}% ({signaldBm}dBm)\nDownload: {bandwidthDownBytes} | Upload: {bandwidthUpBytes}",
         "tooltip-format-ethernet": "{ifname} (wired)\nDownload: {bandwidthDownBytes} | Upload: {bandwidthUpBytes}",
@@ -191,7 +204,7 @@
     },
 
     "battery": {
-        "interval": 10,
+        "interval": 8,
         "states": {
             "warning": 30,
             "critical": 15

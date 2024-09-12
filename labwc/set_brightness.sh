@@ -4,10 +4,10 @@ COMMAND=$1
 
 case $COMMAND in
 	up)
-		brightnessctl set +10%
+		brightnessctl set +5%
 		;;
 	down)
-		brightnessctl set 10%-
+		brightnessctl set 5%-
 		;;
 esac
 

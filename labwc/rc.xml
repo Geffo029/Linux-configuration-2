@@ -9,13 +9,14 @@
 	</core>
 	<margin top="0" bottom="0" left="0" right="0"/>
 	<theme>
-		<name>Adapta-Nokto</name>
+		<!-- <name>Adapta-Nokto</name> -->
+		<name>VelniasLighter</name>
 		<cornerRadius>8</cornerRadius>
 		<font name="monospace" size="9"/>
 		<dropShadows>yes</dropShadows>
 		<!-- <font name="sans" size="13" /> -->
 	</theme>
-	<!-- <desktops number="4" / -->&gt; 	
+	<!-- <desktops number="4" / -->
 	<desktops>
 		<names>
 			<name>1</name>
@@ -123,7 +124,7 @@
 
 	<mouse>
 		<default/>
-		<scrollFactor>1</scrollFactor>
+		<scrollFactor>2</scrollFactor>
 		<!-- Show a custom menu on desktop right click -->
 		<context name="Root">
 			<mousebind button="Right" action="Press">

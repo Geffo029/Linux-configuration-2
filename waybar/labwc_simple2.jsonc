@@ -1,13 +1,13 @@
 {
     "layer": "top", // Waybar at top layer
     // "position": "bottom", // Waybar position (top|bottom|left|right)
-    "height": 26, // Waybar height (to be removed for auto height)
+    "height": 30, // Waybar height (to be removed for auto height)
     // "width": 1280, // Waybar width
     "spacing": 8, // Gaps between modules (4px)
 
 
     "modules-left": [
-	    "wlr/taskbar"
+	"wlr/taskbar"
     ],
 
     "modules-center": [ 
@@ -66,6 +66,7 @@
     },
 
     "tray": {
+	"show-passive-items": true,
         "icon-size": 20,
         "spacing": 10
     },
@@ -73,6 +74,7 @@
     "group/hardware-info": {
         "modules": ["custom/handle-info", "cpu", "memory", "disk", "temperature"],
         "drawer": {
+	    "click-to-reveal": true,
             "transition-duration": 300,
             "children-class": "hardware-items",
             "transition-left-to-right": false
@@ -82,8 +84,8 @@
 
     "custom/handle-info": {
         "format": "",
-        "tooltip": false,
-        "on-click": "foot -e htop"
+        "tooltip": false
+        // "on-click": "foot -e htop"
     },
 
     "cpu": {
@@ -108,7 +110,7 @@
         "hwmon-path": "/sys/class/hwmon/hwmon4/temp1_input",
         "critical-threshold": 80,
         "format": " {temperatureC}°C",
-        "format-critical": "!{temperatureC}°C"
+        "format-critical": "! {temperatureC}°C"
     },
 
     "privacy": {
@@ -139,19 +141,20 @@
         "format-icons": {
             "activated": "",
             "deactivated": ""
-        }
+        },
+	"tooltip-format-deactivated": "•IDLE INHIBITOR\nNot active",
+	"tooltip-format-activated": "•IDLE INHIBITOR\nActive"
     },
 
     "bluetooth": {
         // "controller": "controller1", // specify the alias of the controller if there are more than 1 on the system
-        // "format": "<U+F294> {status}",
-        "format": "",
-        // "format-on": "",
-        // "format-disabled": "",
-        "format-connected": " ({num_connections})",
-        "tooltip-format": "{controller_alias} ({controller_address})",
-        "tooltip-format-connected": "{controller_alias} ({controller_address})\nConnected:\n{device_enumerate}",
-        "tooltip-format-enumerate-connected": "{device_alias} ({device_address})",
+        // "format": "",
+        "format-on": "󰂯",
+        "format-off": "󰂲",
+        "format-connected": "󰂱 ({num_connections})",
+        "tooltip-format": "•BLUETOOTH\n{controller_alias} ({controller_address})",
+        "tooltip-format-connected": "•BLUETOOTH\n{controller_alias} ({controller_address})\nConnected:\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "•BLUETOOTH\n{device_alias} ({device_address})",
         // "tooltip-format-connected": "Alias: {controller_alias}\nAddress: {controller_address}\n{device_enumerate}",
         // "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
         "on-click": "foot -e bluetuith"
@@ -180,7 +183,7 @@
         // "smooth-scrolling-threshold": 0.1,
         "scroll-step": 0.2,
         "ignored-sinks": ["Easy Effects Sink"],
-        "tooltip-format": "{desc}\nOutput: {volume}%\nInput: {format_source}",
+        "tooltip-format": "•AUDIO\n{desc}\nOutput: {volume}%\nInput: {format_source}",
         "on-click": "foot -e pulsemixer"
     },
 
@@ -188,19 +191,21 @@
         "interval": 2,
         "format": "{ifname}",
         "format-wifi": "",
+	"format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
         "format-ethernet": "",
         "format-disconnected": "",
-        "tooltip-format": "{ifname}",
-        "tooltip-format-wifi": "{ifname} (wireless)\nNetwork: {essid}\nSignal strenght: {signalStrength}% ({signaldBm}dBm)\nDownload: {bandwidthDownBytes} | Upload: {bandwidthUpBytes}",
-        "tooltip-format-ethernet": "{ifname} (wired)\nDownload: {bandwidthDownBytes} | Upload: {bandwidthUpBytes}",
-        "tooltip-format-disconnected": "Disconnected",
-        "on-click": "foot -W 70x36 nmtui"
+        "tooltip-format": "•NETWORK\n{ifname}",
+        "tooltip-format-wifi": "•NETWORK\n{ifname} (wireless)\nNetwork: {essid}\nSignal strenght: {signalStrength}% ({signaldBm}dBm)\nDownload: {bandwidthDownBytes} | Upload: {bandwidthUpBytes}",
+        "tooltip-format-ethernet": "•NETWORK\n{ifname} (wired)\nDownload: {bandwidthDownBytes} | Upload: {bandwidthUpBytes}",
+        "tooltip-format-disconnected": "•NETWORK\nDisconnected",
+        "on-click": "foot -W 75x40 nmtui"
     },
 
     "backlight": {
-        "format": "",
-        // "format-icons": ["▁", "▂", "▄","▆", "█"],
-        "tooltip-format": "Brightness: {percent}%"
+        //"format": "",
+        "format": "{icon}",
+        "format-icons": ["󰃞","󰃟", "󰃠"],
+        "tooltip-format": "•BACKLIGHT\nBrightness: {percent}%"
     },
 
     "battery": {
@@ -210,11 +215,16 @@
             "critical": 15
         },
         "format": "{icon}",
-        "format-plugged": " {icon}",
+        //"format-plugged": " {icon}",
+        //"format-charging": " {icon}",
+        "format-plugged": "{icon}󱐌",
+        "format-charging": "{icon}󱐌",
         // "format-discharging": "{icon}",
         "format-discharging-critical": "!{icon}",
-        "format-icons": ["", "", "", "", ""],
+        //"format-icons": ["", "", "", "", ""],
+        // "format-icons": ["󰁺", "󰁼", "󰁾", "󰂀", "󰂂", "󰁹"],
+        "format-icons": ["󰁺", "󰁼", "󰁾", "󰂀", "󰂂", "󰁹"],
         "max-length": 25,
-        "tooltip-format": "Capacity: {capacity}%\nPower draw: {power}W\n{timeTo}"
+        "tooltip-format": "•BATTERY\nCapacity: {capacity}%\nPower draw: {power}W\n{timeTo}"
     }
 }

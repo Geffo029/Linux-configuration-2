@@ -124,7 +124,7 @@
 
 	<mouse>
 		<default/>
-		<scrollFactor>2</scrollFactor>
+		<!-- <scrollFactor>2</scrollFactor> -->
 		<!-- Show a custom menu on desktop right click -->
 		<context name="Root">
 			<mousebind button="Right" action="Press">
@@ -144,10 +144,23 @@
 		</context>
 	</mouse>
 
-	<libinput>
+	<libinput> 
 		<device category="touchpad">
-			<pointerSpeed>0.1</pointerSpeed>
+			<pointerSpeed>0.15</pointerSpeed>
 			<naturalScroll>yes</naturalScroll>
-		</device>
+			<scrollFactor>0.5</scrollFactor>
+		</device> 		
+		
+		<device category="non-touch">
+    			<naturalScroll>no</naturalScroll>
+			<leftHanded>no</leftHanded>
+			<pointerSpeed>0.5</pointerSpeed>
+			<accelProfile>flat</accelProfile>
+			<disableWhileTyping>no</disableWhileTyping>
+			<calibrationMatrix></calibrationMatrix>
+			<scrollFactor>1.2</scrollFactor>
+  		</device>
 	</libinput>
+
+
 </labwc_config>

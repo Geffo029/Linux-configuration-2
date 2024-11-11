@@ -1,24 +1,26 @@
 {
     "layer": "top", // Waybar at top layer
     // "position": "bottom", // Waybar position (top|bottom|left|right)
-    "height": 26, // Waybar height (to be removed for auto height)
+    "height": 30, // Waybar height (to be removed for auto height)
     // "width": 1280, // Waybar width
     "spacing": 8, // Gaps between modules (4px)
-    // Choose the order of the modules
+
 
     "modules-left": [
         "wlr/taskbar"
     ],
 
-    "modules-center": [ "clock" ],
+    "modules-center": [ 
+        "clock" 
+    ],
 
     "modules-right": [
         "tray",
         "group/hardware-info",
-	"idle_inhibitor",
+        "idle_inhibitor",
         "privacy",
         "bluetooth",
-	"pulseaudio",
+        "pulseaudio",
         "network",
         "backlight",
         "battery"
@@ -32,6 +34,24 @@
         "on-click": "minimize-raise"
     },
 
+    /*
+    "wlr/workspaces": {
+        "format": "{icon}",
+    "on-click": "activate",
+    "format-icons": {
+        "1": "",
+        "2": "",
+        "3": "",
+        "4": "",
+        "5": "",
+        "urgent": "",
+        "active": "",
+        "default": ""
+    },
+    "sort-by-number": true
+    },
+    */
+
     "clock": {
         "tooltip-format": "<tt>{calendar}</tt>",
         "calendar": {
@@ -39,7 +59,6 @@
             "format": {
                 "months": "<span color='#ffead3'><b>{}</b></span>",
                 "days": "<span color='#99ffdd'><b>{}</b></span>",
-                // "weeks": "<span color='#99ffdd'><b>{:%U}</b></span>",
                 "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
                 "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
             }
@@ -47,6 +66,7 @@
     },
 
     "tray": {
+	"show-passive-items": true,
         "icon-size": 20,
         "spacing": 10
     },
@@ -54,6 +74,7 @@
     "group/hardware-info": {
         "modules": ["custom/handle-info", "cpu", "memory", "disk", "temperature"],
         "drawer": {
+	    "click-to-reveal": true,
             "transition-duration": 300,
             "children-class": "hardware-items",
             "transition-left-to-right": false
@@ -63,41 +84,36 @@
 
     "custom/handle-info": {
         "format": "",
-        //"format": "Resources",
-        "tooltip": false,
-        "on-click": "foot -e htop"
+        "tooltip": false
+        // "on-click": "foot -e htop"
     },
 
     "cpu": {
         "interval": 2,
         "format": " {usage}%"
-        //"format": "CPU {usage}%"
     },
 
     "memory": {
         "interval": 2,
         "format": " {percentage}%",
-        //"format": "RAM {percentage}%",
         "tooltip-format": "Memory used: {used}GiB ({total}GiB total)\nSwap used: {swapUsed}GiB ({swapTotal}GiB total)"
     },
 
     "disk": {
         "interval": 30,
         "format": " {percentage_used}%"
-        //"format": "Disk {percentage_used}%"
     },
 
     "temperature": {
+	"interval": 2,
         // "thermal-zone": 2,
-        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "hwmon-path": "/sys/class/hwmon/hwmon4/temp1_input",
         "critical-threshold": 80,
         "format": " {temperatureC}°C",
-        //"format": "Temperature {temperatureC}°C",
         "format-critical": "! {temperatureC}°C"
-        //"format-critical": "!Temperature {temperatureC}°C"
     },
 
-     "privacy": {
+    "privacy": {
         "icon-spacing": 4,
         "icon-size": 15,
         "transition-duration": 250,
@@ -123,85 +139,91 @@
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
-            "activated": " ON",
-            //"activated": "Idle inhibited",
-            "deactivated": " OFF"
-            //"deactivated": "Idle allowed"
+            "activated": "",
+            "deactivated": ""
         },
-	"tooltip-format-activated": "Idle inhibited",
-	"tooltip-format-deactivated": "Idle allowed"
+	"tooltip-format-deactivated": "•IDLE INHIBITOR\nNot active",
+	"tooltip-format-activated": "•IDLE INHIBITOR\nActive"
     },
 
     "bluetooth": {
         // "controller": "controller1", // specify the alias of the controller if there are more than 1 on the system
-        // "format": "<U+F294> {status}",
-        "format-off": " OFF",
-        "format-disabled": " disabled",
-        //"format-disabled": "Bluetooth OFF",
-        "format-on": " ON",
-        //"format-on": "Bluetooth ON",
-        // "format-disabled": "", // an empty format will hide the module
-        // "format-connected": "<U+F294> {num_connections} connected",
-        // "tooltip-format": "{controller_alias}\t{controller_address}",
-        "tooltip-format-connected": "Alias: {controller_alias}\nAddress: {controller_address}\n{device_enumerate}",
-        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}"
+        // "format": "",
+        "format-on": "󰂯",
+        "format-off": "󰂲",
+        "format-connected": "󰂱 ({num_connections})",
+        "tooltip-format": "•BLUETOOTH\n{controller_alias} ({controller_address})",
+        "tooltip-format-connected": "•BLUETOOTH\n{controller_alias} ({controller_address})\nConnected:\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "•BLUETOOTH\n{device_alias} ({device_address})",
+        // "tooltip-format-connected": "Alias: {controller_alias}\nAddress: {controller_address}\n{device_enumerate}",
+        // "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+        "on-click": "foot -e bluetuith"
     },
 
    "pulseaudio": {
-        "format": "{icon} {volume}%",
-        //"format": "Volume {volume}%",
-        // "format-bluetooth": "{icon}",
-        "format-muted": " {volume}%",
-        //"format-muted": "Volume muted ({volume}%)",
+        "states": {
+            "veryhigh": 200,
+            "high": 100,
+            "low": 50,
+            "zero": 0
+        },
+        "format": "{icon}",
+        "format-zero": "",
+        "format-low": "",
+        "format-high": "",
+        "format-veryhigh": "",
+        "format-bluetooth": "{icon}",
+        // "format-muted": "",
+        "format-muted": "",
         "format-icons": {
             "headphone": "",
-            "phone": "",
-            "default": ["", "", ""]
+            "phone": ""
+            // "default": ["", "", ""]
         },
-    // "smooth-scrolling-threshold": 0.1,
-        "scroll-step": 1,
-        "on-click": "foot -e pulsemixer",
+        // "smooth-scrolling-threshold": 0.1,
+        "scroll-step": 0.2,
         "ignored-sinks": ["Easy Effects Sink"],
-        "tooltip-format": "{desc}\nOutput: {volume}%\nInput: {format_source}"
+        "tooltip-format": "•AUDIO\n{desc}\nOutput: {volume}%\nInput: {format_source}",
+        "on-click": "foot -e pulsemixer"
     },
 
     "network": {
         "interval": 2,
-        "format": "{ifname}",
-        "format-wifi": " {signalStrength}%",
-        //"format-wifi": "Internet: WIFI {signalStrength}%",
+        "format-wifi": "{icon}",
+	    "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
         "format-ethernet": "",
-        //"format-ethernet": "Internet: ethernet",
-        "format-disconnected": "!",
-        //"format-disconnected": "Internet: !no connection",
-        "tooltip-format": "{ifname}",
-        "tooltip-format-wifi": "{ifname} (wireless)\nNetwork: {essid}\nSignal strenght: {signalStrength}% ({signaldBm}dBm)\nDownload: {bandwidthDownBytes} | Upload: {bandwidthUpBytes}",
-        "tooltip-format-ethernet": "{ifname} (wired)\nDownload: {bandwidthDownBytes} | Upload: {bandwidthUpBytes}",
-        "tooltip-format-disconnected": "Disconnected",
-	"on-click": "foot -e nmtui"
+        "format-disconnected": "",
+        "tooltip-format": "•NETWORK\n{ifname}",
+        "tooltip-format-wifi": "•NETWORK\n{ifname} (wireless)\nNetwork: {essid}\nSignal strenght: {signalStrength}% ({signaldBm}dBm)\nDownload: {bandwidthDownBytes} | Upload: {bandwidthUpBytes}",
+        "tooltip-format-ethernet": "•NETWORK\n{ifname} (wired)\nDownload: {bandwidthDownBytes} | Upload: {bandwidthUpBytes}",
+        "tooltip-format-disconnected": "•NETWORK\nDisconnected",
+        "on-click": "foot -W 75x40 nmtui"
     },
 
     "backlight": {
-        "format": " {percent}%",
-        //"format": "Brightness {percent}%",
-        "tooltip-format": "Brightness: {percent}%"
+        //"format": "",
+        "format": "{icon}",
+        "format-icons": ["󰃞","󰃟", "󰃠"],
+        "tooltip-format": "•BACKLIGHT\nBrightness: {percent}%"
     },
 
     "battery": {
-        "interval": 10,
+        "interval": 8,
         "states": {
             "warning": 30,
             "critical": 15
         },
-	"format": "{icon} {capacity}%",
-	//"format": "Battery {capacity}%",
-        "format-plugged": " {icon} {capacity}%",
-        //"format-plugged": "Battery plugged {capacity}%",
+        "format": "{icon}",
+        //"format-plugged": " {icon}",
+        //"format-charging": " {icon}",
+        "format-plugged": "{icon}󱐌",
+        "format-charging": "{icon}󱐌",
         // "format-discharging": "{icon}",
-        "format-discharging-critical": "!{icon} {capacity}%",
-        //"format-discharging-critical": "Battery !{capacity}",
-        "format-icons": ["", "", "", "", ""],
+        "format-discharging-critical": "!{icon}",
+        //"format-icons": ["", "", "", "", ""],
+        // "format-icons": ["󰁺", "󰁼", "󰁾", "󰂀", "󰂂", "󰁹"],
+        "format-icons": ["󰁺", "󰁼", "󰁾", "󰂀", "󰂂", "󰁹"],
         "max-length": 25,
-        "tooltip-format": "Capacity: {capacity}%\nPower draw: {power}W\n{timeTo}"
+        "tooltip-format": "•BATTERY\nCapacity: {capacity}%\nPower draw: {power}W\n{timeTo}"
     }
 }

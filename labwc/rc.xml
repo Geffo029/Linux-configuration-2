@@ -58,6 +58,10 @@
 		<keybind key="XF86MonBrightnessDown">
 			<action name="Execute" command="~/.config/labwc/set_brightness.sh down" />
 		</keybind>
+		<keybind key="Print">
+			<action name="Execute" command="~/.config/labwc/take_screenshot.sh" />
+			<!--<action name="Execute" command="~/.config/labwc/logout_tofi.sh" />-->
+		</keybind>
 		<keybind key="C-W-Right">
 			<action name="GoToDesktop" to="right" wrap="no"/>
 		</keybind>

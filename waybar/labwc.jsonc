@@ -11,7 +11,7 @@
     ],
 
     "modules-center": [ 
-        "clock" 
+        "clock"
     ],
 
     "modules-right": [
@@ -23,6 +23,7 @@
         "pulseaudio",
         "network",
         "backlight",
+        /* "power-profiles-daemon", */
         "battery"
     ],
 
@@ -53,7 +54,7 @@
     */
 
     "clock": {
-        "tooltip-format": "<tt>{calendar}</tt>",
+        /* "tooltip-format": "<tt>{calendar}</tt>",
         "calendar": {
             "mode" : "month",
             "format": {
@@ -62,6 +63,28 @@
                 "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
                 "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
             }
+        } */
+	"format": "{:%H:%M}",
+	"tooltip-format": "<tt>{calendar}</tt>",
+        "calendar": {
+            "mode"         : "month",
+            "mode-mon-col" : 3,
+            "weeks-pos"    : "",
+            "on-scroll"    : 1,
+            "format": {
+                "months":     "<span color='#ffead3'><b>{}</b></span>",
+                "days":       "<span color='#99ffdd'><b>{}</b></span>",
+                "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
+		"weeks": "{:%W}",
+                "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+            }
+        },
+        "actions":  {
+            "on-click": "mode",
+            "on-scroll-up": "tz_up",
+            "on-scroll-down": "tz_down",
+            "on-scroll-up": "shift_up",
+            "on-scroll-down": "shift_down"
         }
     },
 
@@ -154,7 +177,7 @@
         "format-connected": "󰂱 ({num_connections})",
         "tooltip-format": "•BLUETOOTH\n{controller_alias} ({controller_address})",
         "tooltip-format-connected": "•BLUETOOTH\n{controller_alias} ({controller_address})\nConnected:\n{device_enumerate}",
-        "tooltip-format-enumerate-connected": "•BLUETOOTH\n{device_alias} ({device_address})",
+        "tooltip-format-enumerate-connected": "{device_alias} ({device_address})",
         // "tooltip-format-connected": "Alias: {controller_alias}\nAddress: {controller_address}\n{device_enumerate}",
         // "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
         "on-click": "foot -e bluetuith"
@@ -172,13 +195,13 @@
         "format-low": "",
         "format-high": "",
         "format-veryhigh": "",
-        "format-bluetooth": "{icon}",
+        "format-bluetooth": "{icon} (󰂯)",
         // "format-muted": "",
         "format-muted": "",
         "format-icons": {
             "headphone": "",
-            "phone": ""
-            // "default": ["", "", ""]
+            "phone": "",
+            "default": ["", ""]
         },
         // "smooth-scrolling-threshold": 0.1,
         "scroll-step": 0.2,
@@ -205,6 +228,18 @@
         "format": "{icon}",
         "format-icons": ["󰃞","󰃟", "󰃠"],
         "tooltip-format": "•BACKLIGHT\nBrightness: {percent}%"
+    },
+
+    "power-profiles-daemon": {
+        "format": "{icon}",
+        "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+        "tooltip": true,
+        "format-icons": {
+            "default": "",
+            "performance": "",
+            "balanced": "",
+            "power-saver": ""
+        }
     },
 
     "battery": {

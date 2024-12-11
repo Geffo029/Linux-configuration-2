@@ -18,7 +18,7 @@
 		},
 		{	
 			"type": "packages",
-			"format": "{?2}{2} (pacman){?}{?3}[{3}]{?}{?4}{4} (dpkg){?}{?5} {5} (rpm){?}{?12}{12} (apk){?} {?14}, {14}/{15} (flatpak system/user){?}{?16}, {16} (snap){?}"
+			"format": "{?2}{2} (pacman){?}{?3}[{3}]{?}{?4}{4} (dpkg){?}{?5} {5} (rpm){?}{?12}{12} (apk){?}{?14}, {14}/{15} (flatpak system/user){?}{?16}, {16} (snap){?}"
 		},
 		"break"
 	]

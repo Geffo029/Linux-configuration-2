@@ -6,6 +6,7 @@ kanshi &
 
 /usr/libexec/pipewire-launcher &
 
+libinput-gestures-setup start &
 
 # Set background color.
 #swaybg -c '#113344' >/dev/null 2>&1 &

@@ -10,7 +10,7 @@
 	<margin top="0" bottom="0" left="0" right="0"/>
 	<theme>
 		<!-- <name>Adapta-Nokto</name> -->
-		<name>VelniasLighter</name>
+		<name>Raven-Cyan</name>
 		<cornerRadius>8</cornerRadius>
 		<font name="monospace" size="9"/>
 		<dropShadows>yes</dropShadows>
@@ -105,8 +105,8 @@
 		</keybind>
 		<!-- Program shortcuts -->
 		<keybind key="W-Space">
-			<!-- <action name="Execute" command="wofi - -show drun" /> -->
-			<action name="Execute" command="tofi-drun --drun-launch=true"/>
+			<!-- <action name="Execute" command="tofi-drun - -drun-launch=true"/> -->
+			<action name="Execute" command="fuzzel --terminal=foot"/>
 		</keybind>
 		<keybind key="W-t">
 			<action name="Execute" command="foot"/>
@@ -148,6 +148,8 @@
 		</context>
 	</mouse>
 
+	<tablet mapToOutput="HDMI-A-1" mouseEmulation="no"/>
+	
 	<libinput> 
 		<device category="touchpad">
 			<pointerSpeed>0.15</pointerSpeed>
@@ -158,7 +160,7 @@
 		<device category="non-touch">
     			<naturalScroll>no</naturalScroll>
 			<leftHanded>no</leftHanded>
-			<pointerSpeed>0.5</pointerSpeed>
+			<pointerSpeed>0.65</pointerSpeed>
 			<accelProfile>flat</accelProfile>
 			<disableWhileTyping>no</disableWhileTyping>
 			<calibrationMatrix></calibrationMatrix>

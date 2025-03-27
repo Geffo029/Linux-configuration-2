@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
-  This is a very simple config file with many options missing. For a complete
-  set of options with comments, see docs/rc.xml.all
+	This is a very simple config file with many options missing. For a complete
+	set of options with comments, see docs/rc.xml.all
 -->
 <labwc_config>
 	<core>
@@ -9,8 +9,8 @@
 	</core>
 	<margin top="0" bottom="0" left="0" right="0"/>
 	<theme>
-		<!-- <name>Adapta-Nokto</name> -->
-		<name>Raven-Cyan</name>
+		<name>Sas</name>
+		<!-- <name>GTK</name> -->
 		<cornerRadius>8</cornerRadius>
 		<font name="monospace" size="9"/>
 		<dropShadows>yes</dropShadows>
@@ -26,7 +26,7 @@
 		</names>
 	</desktops>
 	<placement>
-		<policy>center</policy>
+		<policy>Center</policy>
 	</placement>
 	<snapping>
 		<range>10</range>
@@ -37,29 +37,28 @@
 			</delay>
 		</overlay>
 	</snapping>
-
 	<keyboard>
 		<default/>
 		<keybind key="C-A-Delete">
-			<action name="Execute" command="~/.config/labwc/logout_tofi.sh" />
+			<action name="Execute" command="~/.config/labwc/logout_tofi.sh"/>
 		</keybind>
 		<keybind key="XF86AudioRaiseVolume">
-			<action name="Execute" command="~/.config/labwc/set_volume.sh up" />
+			<action name="Execute" command="~/.config/labwc/set_volume.sh up"/>
 		</keybind>
 		<keybind key="XF86AudioLowerVolume">
-			<action name="Execute" command="~/.config/labwc/set_volume.sh down" />
+			<action name="Execute" command="~/.config/labwc/set_volume.sh down"/>
 		</keybind>
 		<keybind key="XF86AudioMute">
-			<action name="Execute" command="~/.config/labwc/set_volume.sh mute" />
+			<action name="Execute" command="~/.config/labwc/set_volume.sh mute"/>
 		</keybind>
 		<keybind key="XF86MonBrightnessUp">
-			<action name="Execute" command="~/.config/labwc/set_brightness.sh up" />
+			<action name="Execute" command="~/.config/labwc/set_brightness.sh up"/>
 		</keybind>
 		<keybind key="XF86MonBrightnessDown">
-			<action name="Execute" command="~/.config/labwc/set_brightness.sh down" />
+			<action name="Execute" command="~/.config/labwc/set_brightness.sh down"/>
 		</keybind>
 		<keybind key="Print">
-			<action name="Execute" command="~/.config/labwc/take_screenshot.sh" />
+			<action name="Execute" command="~/.config/labwc/take_screenshot.sh"/>
 			<!--<action name="Execute" command="~/.config/labwc/logout_tofi.sh" />-->
 		</keybind>
 		<keybind key="C-W-Right">
@@ -103,6 +102,9 @@
 		<keybind key="A-F4">
 			<action name="Kill"/>
 		</keybind>
+		<keybind key="F11">
+			<action name="ToggleFullscreen"/>
+		</keybind>
 		<!-- Program shortcuts -->
 		<keybind key="W-Space">
 			<!-- <action name="Execute" command="tofi-drun - -drun-launch=true"/> -->
@@ -124,8 +126,10 @@
 		<keybind key="W-F4">
 			<action name="None"/>
 		</keybind>
+		<keybind key="C-A-r">
+			<action name="Reconfigure"/>
+		</keybind>
 	</keyboard>
-
 	<mouse>
 		<default/>
 		<!-- <scrollFactor>2</scrollFactor> -->
@@ -147,26 +151,21 @@
 			</mousebind>
 		</context>
 	</mouse>
-
 	<tablet mapToOutput="HDMI-A-1" mouseEmulation="no"/>
-	
-	<libinput> 
+	<libinput>
 		<device category="touchpad">
 			<pointerSpeed>0.15</pointerSpeed>
 			<naturalScroll>yes</naturalScroll>
-			<scrollFactor>0.5</scrollFactor>
-		</device> 		
-		
+			<scrollFactor>0.4</scrollFactor>
+		</device>
 		<device category="non-touch">
-    			<naturalScroll>no</naturalScroll>
+			<naturalScroll>no</naturalScroll>
 			<leftHanded>no</leftHanded>
 			<pointerSpeed>0.65</pointerSpeed>
 			<accelProfile>flat</accelProfile>
 			<disableWhileTyping>no</disableWhileTyping>
-			<calibrationMatrix></calibrationMatrix>
+			<calibrationMatrix/>
 			<scrollFactor>1.2</scrollFactor>
-  		</device>
+		</device>
 	</libinput>
-
-
 </labwc_config>

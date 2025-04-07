@@ -1,0 +1,14 @@
+ignore-empty-password
+
+show-failed-attempts
+
+#daemonize
+
+image=$HOME/Pictures/wallpapers/wallpaper
+
+indicator-caps-lock
+
+indicator-idle-visible
+
+inside-color=000000aa
+ring-color=FFFFFFaa

@@ -11,8 +11,8 @@
 	<theme>
 		<name>Sas</name>
 		<!-- <name>GTK</name> -->
-		<cornerRadius>8</cornerRadius>
-		<font name="monospace" size="9"/>
+		<cornerRadius>0</cornerRadius>
+		<font name="monospace" size="10"/>
 		<dropShadows>yes</dropShadows>
 		<!-- <font name="sans" size="13" /> -->
 	</theme>
@@ -24,6 +24,7 @@
 			<name>3</name>
 			<name>4</name>
 		</names>
+		<popupTime>1000</popupTime>
 	</desktops>
 	<placement>
 		<policy>Center</policy>
@@ -59,7 +60,6 @@
 		</keybind>
 		<keybind key="Print">
 			<action name="Execute" command="~/.config/labwc/take_screenshot.sh"/>
-			<!--<action name="Execute" command="~/.config/labwc/logout_tofi.sh" />-->
 		</keybind>
 		<keybind key="C-W-Right">
 			<action name="GoToDesktop" to="right" wrap="no"/>
@@ -107,8 +107,8 @@
 		</keybind>
 		<!-- Program shortcuts -->
 		<keybind key="W-Space">
-			<!-- <action name="Execute" command="tofi-drun - -drun-launch=true"/> -->
-			<action name="Execute" command="fuzzel --terminal=foot"/>
+			<!-- <action name="Execute" command="tofi-drun - -drun-launch=true"/> --> 
+			<action name="Execute" command="wofi --conf ~/.config/wofi/app_launcher"/>
 		</keybind>
 		<keybind key="W-t">
 			<action name="Execute" command="foot"/>
@@ -129,6 +129,9 @@
 		<keybind key="C-A-r">
 			<action name="Reconfigure"/>
 		</keybind>
+		<keybind key="W-m">
+			<action name="ShowMenu" menu="interaction-menu"/>
+		</keybind>
 	</keyboard>
 	<mouse>
 		<default/>
@@ -136,10 +139,10 @@
 		<!-- Show a custom menu on desktop right click -->
 		<context name="Root">
 			<mousebind button="Right" action="Press">
-				<action name="ShowMenu" menu="some-custom-menu"/>
+				<action name="ShowMenu" menu="interaction-menu"/>
 			</mousebind>
 			<mousebind button="Left" action="Press">
-				<action/>
+				<action name="Unfocus"/>
 			</mousebind>
 		</context>
 		<context name="Frame">
@@ -156,7 +159,7 @@
 		<device category="touchpad">
 			<pointerSpeed>0.15</pointerSpeed>
 			<naturalScroll>yes</naturalScroll>
-			<scrollFactor>0.4</scrollFactor>
+			<scrollFactor>0.6</scrollFactor>
 		</device>
 		<device category="non-touch">
 			<naturalScroll>no</naturalScroll>
@@ -165,7 +168,7 @@
 			<accelProfile>flat</accelProfile>
 			<disableWhileTyping>no</disableWhileTyping>
 			<calibrationMatrix/>
-			<scrollFactor>1.2</scrollFactor>
+			<scrollFactor>1.3</scrollFactor>
 		</device>
 	</libinput>
 </labwc_config>

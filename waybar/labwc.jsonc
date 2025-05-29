@@ -7,6 +7,7 @@
 
 
     "modules-left": [
+		"wlr/workspaces",
         "wlr/taskbar"
     ],
 
@@ -20,10 +21,13 @@
         "idle_inhibitor",
         "privacy",
         "bluetooth",
-        "pulseaudio",
+		"group/audio",
+        // "pulseaudio",
         "network",
-        "backlight",
+        "group/light",
+        // "backlight",
         /* "power-profiles-daemon", */
+		"custom/power_options",
         "battery"
     ],
 
@@ -35,23 +39,17 @@
         "on-click": "minimize-raise"
     },
 
-    /*
     "wlr/workspaces": {
         "format": "{icon}",
-    "on-click": "activate",
-    "format-icons": {
-        "1": "",
-        "2": "",
-        "3": "",
-        "4": "",
-        "5": "",
-        "urgent": "",
-        "active": "",
-        "default": ""
+        "format-icons": {
+            // "urgent": "",
+            // "active": "",
+            // "default": ""
+            "active": "󰹞",
+            "default": "󰹟"
+        },
+        "on-click": "activate"
     },
-    "sort-by-number": true
-    },
-    */
 
     "clock": {
         /* "tooltip-format": "<tt>{calendar}</tt>",
@@ -94,16 +92,16 @@
         "spacing": 10
     },
 
-    "group/hardware-info": {
-        "modules": ["custom/handle-info", "cpu", "memory", "disk", "temperature"],
-        "drawer": {
-	    "click-to-reveal": true,
-            "transition-duration": 300,
-            "children-class": "hardware-items",
-            "transition-left-to-right": false
-        },
-        "orientation": "inherit"
-    },
+	"group/hardware-info": {
+		"modules": ["custom/handle-info", "cpu", "memory", "disk", "temperature"],
+		"drawer": {
+			"click-to-reveal": true,
+			"transition-duration": 300,
+			"children-class": "hardware-items",
+			"transition-left-to-right": false
+		},
+		"orientation": "inherit"
+	},
 
     "custom/handle-info": {
         "format": "",
@@ -124,7 +122,8 @@
 
     "disk": {
         "interval": 30,
-        "format": " {percentage_used}%"
+        "format": " {percentage_used}%",
+	"tooltip-format": "{used} used out of {total} on {path} ({percentage_used}%)"
     },
 
     "temperature": {
@@ -165,8 +164,8 @@
             "activated": "",
             "deactivated": ""
         },
-	"tooltip-format-deactivated": "•IDLE INHIBITOR\nNot active",
-	"tooltip-format-activated": "•IDLE INHIBITOR\nActive"
+		"tooltip-format-deactivated": "•IDLE INHIBITOR\nNot active",
+		"tooltip-format-activated": "•IDLE INHIBITOR\nActive"
     },
 
     "bluetooth": {
@@ -182,6 +181,16 @@
         // "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
         "on-click": "foot -e bluetuith"
     },
+
+	"group/audio": {
+		"modules": ["pulseaudio", "pulseaudio/slider"],
+		"drawer": {
+			"click-to-reveal": false,
+			"transition-duration": 300,
+			"transition-left-to-right": false
+		},
+		"orientation": "inherit"
+	},
 
    "pulseaudio": {
         "states": {
@@ -207,7 +216,13 @@
         "scroll-step": 0.2,
         "ignored-sinks": ["Easy Effects Sink"],
         "tooltip-format": "•AUDIO\n{desc}\nOutput: {volume}%\nInput: {format_source}",
-        "on-click": "foot -e pulsemixer"
+        // "on-click": "",
+        "on-click-right": "foot -e pulsemixer",
+    },
+
+    "pulseaudio/slider": {
+    	"min": 0,
+    	"max": 150	
     },
 
     "network": {
@@ -223,11 +238,26 @@
         "on-click": "foot -W 75x40 nmtui"
     },
 
+	"group/light": {
+		"modules": ["backlight", "backlight/slider"],
+		"drawer": {
+			"click-to-reveal": false,
+			"transition-duration": 300,
+			"transition-left-to-right": false	
+		},
+		"orientation": "inherit"
+	},
+
     "backlight": {
         //"format": "",
         "format": "{icon}",
         "format-icons": ["󰃞","󰃟", "󰃠"],
         "tooltip-format": "•BACKLIGHT\nBrightness: {percent}%"
+    },
+
+    "backlight/slider": {
+    	"min": 2,
+    	"max": 100	
     },
 
     "power-profiles-daemon": {
@@ -249,16 +279,23 @@
             "critical": 15
         },
         "format": "{icon}",
-        //"format-plugged": " {icon}",
         //"format-charging": " {icon}",
         "format-plugged": "{icon}󱐌",
         "format-charging": "{icon}󱐌",
-        // "format-discharging": "{icon}",
         "format-discharging-critical": "!{icon}",
         //"format-icons": ["", "", "", "", ""],
-        // "format-icons": ["󰁺", "󰁼", "󰁾", "󰂀", "󰂂", "󰁹"],
         "format-icons": ["󰁺", "󰁼", "󰁾", "󰂀", "󰂂", "󰁹"],
         "max-length": 25,
         "tooltip-format": "•BATTERY\nCapacity: {capacity}%\nPower draw: {power}W\n{timeTo}"
-    }
+    },
+
+	"custom/power_options": {
+		"exec": "~/.config/waybar/power-options-wbscript.sh",
+		"format": "{icon}",
+		"format-icons": ["", "", ""],
+		"return-type": "json",
+		"interval": 2
+	}
 }
+
+

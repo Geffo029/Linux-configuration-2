@@ -16,6 +16,11 @@ tooltip {
     background: rgba(0,0,0, 0.80);
 }
 
+#workspaces button {
+    padding: 0px;
+    margin: 0px;
+}
+
 #taskbar button {
     padding: 2px 8px;
 }
@@ -53,6 +58,28 @@ tooltip {
 #bluetooth.off {
     color: gray;
 }
+
+#pulseaudio-slider slider, #backlight-slider slider {
+   /* min-width: 0px;
+    min-height: 0px;
+    opacity: 0;
+    background-image: none;
+    border: none;
+    box-shadow: none; */
+    background-color: white;
+}
+#pulseaudio-slider trough, #backlight-slider trough {
+    min-width: 55px;
+    min-height: 6px;
+    border-radius: 3px;
+    background-color: grey;
+}
+#pulseaudio-slider highlight, #backlight-slider highlight {
+    /*min-width: 0px;*/
+    border-radius: 6px;
+    background-color: #5293E1;
+}
+
 
 #pulseaudio.muted {
     color: gray;

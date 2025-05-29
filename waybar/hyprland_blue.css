@@ -56,32 +56,39 @@ window#waybar {
 }
 
 
-#clock,
-#battery,
-#cpu,
-#memory,
-#temperature,
-#network,
-#pulseaudio,
-#custom-media,
-#tray,
-#mode,
-#custom-power,
-#custom-menu,
-#idle_inhibitor {
-    padding: 0 10px;
+#clock, #battery, #backlight, #network, #pulseaudio, #privacy, #bluetooth, #idle_inhibitor, #hardware-info, #tray {
+    /* border: 1px solid white; */
+    padding: 0px 8px;
 }
 #mode {
     color: #cc3436;
     font-weight: bold;
 }
-#custom-power {
-    background-color: rgba(0,119,179,0.6);
-    border-radius: 50px;
-    margin: 5px 5px;
-    padding: 1px 3px;
-}
 /*-----Indicators----*/
+#cpu, #memory, #disk, #temperature {
+    padding: 0px 5px;
+    margin: 0px 3px;
+}
+
+#clock {
+    font-weight: bold;
+}
+#idle_inhibitor.deactivated {
+    color: gray;
+}
+#bluetooth.off {
+    color: gray;
+}
+#pulseaudio.muted {
+    color: gray;
+}
+#pulseaudio.veryhigh {
+    color: orange
+}
+
+#network.disconnected {
+    color: gray;
+}
 #idle_inhibitor.activated {
     color: #2dcc36;
 }

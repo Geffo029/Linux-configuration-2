@@ -17,20 +17,20 @@
 
     "modules-right": [
         "tray", 
-        "group/hardware",
+        "group/hardware-info",
         "idle_inhibitor", 
         "bluetooth", 
-        "privacy",
         "pulseaudio", 
         "network", 
         "backlight",
-        "battery", 
+        "custom/power_options",
+        "battery",
         "clock"
     ],
 
 
     "hyprland/workspaces": {
-        "format": "{name}: {icon}",
+        "format": "{icon}",
         "format-icons": {
             "urgent": "",
             "active": "",
@@ -45,24 +45,25 @@
         "max-length": 60
     },
 
-    "tray": {
-        "icon-size": 22,
-        "spacing": 8
+	"tray": {
+    	"show-passive-items": true,
+		"icon-size": 20,
+		"spacing": 10
     },
 
-    "group/hardware": {
-        "modules": ["custom/handle", "cpu", "memory", "disk", "temperature"],
+    "group/hardware-info": {
+        "modules": ["custom/handle-info", "cpu", "memory", "disk", "temperature"],
         "drawer": {
-            "transition-duration": 250,
-            "children-class": "hardware",
+			"click-to-reveal": true,
+            "transition-duration": 300,
+            "children-class": "hardware-items",
             "transition-left-to-right": false
         },
         "orientation": "inherit"
     },
-    "custom/handle": {
+    "custom/handle-info": {
         "format": "",
         "tooltip": false,
-        "on-click": "foot -e htop"
     },
     "cpu": {
         "interval": 2,
@@ -74,13 +75,13 @@
         "tooltip-format": "Memory used: {used}GiB ({total}GiB total)\nSwap used: {swapUsed}GiB ({swapTotal}GiB total)"
     },
     "disk": {
-        "interval": 30,
+        "interval": 15,
         "format": " {percentage_used}%"
     },
-    "temperature": {
-        // "thermal-zone": 2,
-        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
-        // "critical-threshold": 80,
+	"temperature": {
+		"interval": 2,
+		"hwmon-path": "/sys/class/hwmon/hwmon4/temp1_input",
+		"critical-threshold": 80,
         "format": "{temperatureC}°C",
         "format-critical": "!{temperatureC}°C"
     },
@@ -90,95 +91,105 @@
         "format-icons": {
             "activated": "",
             "deactivated": ""
-        }
+        },
+		"tooltip-format-deactivated": "•IDLE INHIBITOR\nNot active",
+		"tooltip-format-activated": "•IDLE INHIBITOR\nActive"
     },
 
     /* "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
     }, */
 
-    "bluetooth": {
-        // "controller": "controller1", // specify the alias of the controller if there are more than 1 on the system
-        "format": " {status}",
-        // "format-disabled": "", // an empty format will hide the module
-        "format-connected": " {num_connections} connected",
-        "tooltip-format": "{controller_alias}\t{controller_address}",
-        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
-        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}"
-    },
+	"bluetooth": {
+		"format-on": "󰂯",
+		"format-off": "󰂲",
+		"format-connected": "󰂱 ({num_connections})",
+		"tooltip-format": "•BLUETOOTH\n{controller_alias} ({controller_address})",
+		"tooltip-format-connected": "•BLUETOOTH\n{controller_alias} ({controller_address})\nConnected:\n{device_enumerate}",
+		"tooltip-format-enumerate-connected": "{device_alias} ({device_address})",
+		"on-click": "foot -e bluetuith"
+	},
 
-    "privacy": {
-        "icon-spacing": 4,
-        "icon-size": 15,
-        "transition-duration": 250,
-        "modules": [
-            {
-                "type": "screenshare",
-                "tooltip": true,
-                "tooltip-icon-size": 20
-            },
-            {
-                "type": "audio-out",
-                "tooltip": true,
-                "tooltip-icon-size": 20
-            },
-            {
-                "type": "audio-in",
-                "tooltip": true,
-                "tooltip-icon-size": 20
-            }
-        ]
-    },
-
-    "pulseaudio": {
+	"pulseaudio": {
+		"states": {
+            "veryhigh": 200,
+            "high": 100,
+            "low": 50,
+            "zero": 0
+        },
         "format": "{icon}",
-        "format-bluetooth": "{icon}",
-        "format-muted": "",
+        "format-zero": "",
+        "format-low": "",
+        "format-high": "",
+        "format-veryhigh": "",
+        "format-bluetooth": "{icon} (󰂯)",
+        "format-muted": "",
         "format-icons": {
             "headphone": "",
             "phone": "",
-            "default": ["", "", ""]
+            "default": ["", ""]
         },
-    // "smooth-scrolling-threshold": 0.1,
+        // "smooth-scrolling-threshold": 0.1,
         "scroll-step": 0.2,
-        "on-click": "pavucontrol",
         "ignored-sinks": ["Easy Effects Sink"],
-        "tooltip-format": "{desc}\nOutput: {volume}%\nInput: {format_source}"
+        "tooltip-format": "•AUDIO\n{desc}\nOutput: {volume}%\nInput: {format_source}",
+        "on-click": "foot -e pulsemixer"
     },
-
     "network": {
         "interval": 2,
-        "format": "{ifname}",
-        "format-wifi": "",
+        "format-wifi": "{icon}",
+	    "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
         "format-ethernet": "",
-        "format-disconnected": "!",
-        "tooltip-format": "{ifname}",
-        "tooltip-format-wifi": "{ifname} (wireless)\nNetwork: {essid}\nSignal strenght: {signalStrength}% ({signaldBm}dBm)\nDownload: {bandwidthDownBytes} | Upload: {bandwidthUpBytes}",
-        "tooltip-format-ethernet": "{ifname} (wired)\nNetwork: {essid}\nSignal strenght: {signalStrength}% ({signaldBm}dBm)\nDownload: {bandwidthDownBytes} | Upload: {bandwidthUpBytes}",
-        "tooltip-format-disconnected": "Disconnected"
+        "format-disconnected": "",
+        "tooltip-format": "•NETWORK\n{ifname}",
+        "tooltip-format-wifi": "•NETWORK\n{ifname} (wireless)\nNetwork: {essid}\nSignal strenght: {signalStrength}% ({signaldBm}dBm)\nDownload: {bandwidthDownBytes} | Upload: {bandwidthUpBytes}",
+        "tooltip-format-ethernet": "•NETWORK\n{ifname} (wired)\nDownload: {bandwidthDownBytes} | Upload: {bandwidthUpBytes}",
+        "tooltip-format-disconnected": "•NETWORK\nDisconnected",
+        "on-click": "foot -W 75x40 nmtui"
     },
 
     "backlight": {
-        "format": " {icon}",
-        // "format-icons": ["▁", "▂", "▄","▆", "█"],
-        "tooltip-format": "Brightness: {percent}%"
+        "format": "{icon}",
+        "format-icons": ["󰃞","󰃟", "󰃠"],
+        "tooltip-format": "•BACKLIGHT\nBrightness: {percent}%"
+    },
+
+    "power-profiles-daemon": {
+        "format": "{icon}",
+        "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+        "tooltip": true,
+        "format-icons": {
+            "default": "",
+            "performance": "",
+            "balanced": "",
+            "power-saver": ""
+        }
     },
 
     "battery": {
-        "interval": 10,
+        "interval": 8,
         "states": {
             "warning": 30,
             "critical": 15
         },
-        "format-plugged": " {icon}",
-        "format-discharging": "{icon}",
+        "format": "{icon}",
+        "format-plugged": "{icon}󱐌",
+        "format-charging": "{icon}󱐌",
         "format-discharging-critical": "!{icon}",
-        "format-icons": ["", "", "", "", ""],
+        "format-icons": ["󰁺", "󰁼", "󰁾", "󰂀", "󰂂", "󰁹"],
         "max-length": 25,
-        "tooltip-format": "Capacity: {capacity}%\nPower draw: {power}W\n{timeTo}"
+        "tooltip-format": "•BATTERY\nCapacity: {capacity}%\nPower draw: {power}W\n{timeTo}"
     },
 
-    "clock": {
+	"custom/power_options": {
+		"exec": "~/.config/waybar/power-options-wbscript.sh",
+		"format": "{icon}",
+		"format-icons": ["", "", ""],
+		"return-type": "json",
+		"interval": 2
+	},
+
+    /*"clock": {
         "tooltip-format": "<tt>{calendar}</tt>",
         "calendar": {
             "mode" : "month",
@@ -189,6 +200,30 @@
                 "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
                 "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
             }
+        }
+    }*/
+    "clock": {
+    	"format": "{:%H:%M}",
+    	"tooltip-format": "<tt>{calendar}</tt>",
+        "calendar": {
+            "mode"         : "month",
+            "mode-mon-col" : 3,
+            "weeks-pos"    : "",
+            "on-scroll"    : 1,
+            "format": {
+                "months":     "<span color='#ffead3'><b>{}</b></span>",
+                "days":       "<span color='#99ffdd'><b>{}</b></span>",
+                "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
+    		"weeks": "{:%W}",
+                "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+            }
+        },
+        "actions":  {
+            "on-click": "mode",
+            "on-scroll-up": "tz_up",
+            "on-scroll-down": "tz_down",
+            "on-scroll-up": "shift_up",
+            "on-scroll-down": "shift_down"
         }
     }
 }

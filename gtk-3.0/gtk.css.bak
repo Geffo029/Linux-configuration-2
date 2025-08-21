@@ -1,0 +1,13 @@
+.thunar toolbar * {padding: 0; font-size: 13px; margin-top: -1px; margin-bottom: -1px}
+.thunar toolbar .location-button image {-gtk-icon-transform: scale(0.7);}
+.thunar toolbar .location-button * {padding: 0px 3px;}
+.thunar toolbar .image-button image {-gtk-icon-transform: scale(0.7);}
+
+scrolledwindow undershoot.top,
+scrolledwindow undershoot.right,
+scrolledwindow undershoot.bottom,
+scrolledwindow undershoot.left { background-image: none; }
+
+.mousepad scrolledwindow {
+	border: 0;
+}

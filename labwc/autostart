@@ -1,15 +1,11 @@
 # Example autostart file
 
 
-#wlr-randr --output eDP-1 --scale 1.5 &
-kanshi &
-
 /usr/libexec/pipewire-launcher &
 
 libinput-gestures-setup start &
 
 # Set background color.
-#swaybg -c '#113344' >/dev/null 2>&1 &
 swaybg --image /home/stefano/Pictures/wallpapers/wallpaper --mode fill >/dev/null 2>&1 &
 
 # Configure output directives such as mode, position, scale and transform.
@@ -19,11 +15,10 @@ swaybg --image /home/stefano/Pictures/wallpapers/wallpaper --mode fill >/dev/nul
 #     output HDMI-A-1 position 1366,0
 #     output eDP-1 position 0,0
 #   }
-# kanshi >/dev/null 2>&1 &
+kanshi >/dev/null 2>&1 &
 
 # Launch a panel such as yambar or waybar.
 waybar --config $HOME/.config/waybar/labwc.jsonc --style $HOME/.config/waybar/labwc.css >/dev/null 2>&1 &
-#$HOME/Git/Waybar-ext-workspaces/build/waybar --config $HOME/.config/waybar/labwc.jsonc --style $HOME/.config/waybar/labwc.css >/dev/null 2>&1 &
 
 # Enable notifications. Typically GNOME/KDE application notifications go
 # through the org.freedesktop.Notifications D-Bus API and require a client such
@@ -46,5 +41,4 @@ swayidle -w \
 	resume 'wlopm --on \*' \
 	timeout 300 'systemctl suspend' \
 	before-sleep 'swaylock -f --image /home/stefano/Pictures/wallpapers/wallpaper' >/dev/null 2>&1 &
-
 

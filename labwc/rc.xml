@@ -4,10 +4,15 @@
 	set of options with comments, see docs/rc.xml.all
 -->
 <labwc_config>
+
 	<core>
 		<adaptiveSync>yes</adaptiveSync>
+		<decoration>server</decoration>
+		<reuseOutputMode>yes</reuseOutputMode>
 	</core>
+
 	<margin top="0" bottom="0" left="0" right="0"/>
+
 	<theme>
 		<name>Sas</name>
 		<!-- <name>GTK</name> -->
@@ -15,9 +20,12 @@
 		<font name="monospace" size="10"/>
 		<dropShadows>yes</dropShadows>
 		<!-- <font name="sans" size="13" /> -->
+		<keepBorder>yes</keepBorder>
 	</theme>
+
 	<!-- <desktops number="4" / -->
 	<desktops>
+		<number>4</number>
 		<names>
 			<name>1</name>
 			<name>2</name>
@@ -26,9 +34,11 @@
 		</names>
 		<popupTime>1000</popupTime>
 	</desktops>
+
 	<placement>
 		<policy>Center</policy>
 	</placement>
+
 	<snapping>
 		<range>10</range>
 		<overlay>
@@ -38,8 +48,10 @@
 			</delay>
 		</overlay>
 	</snapping>
+
 	<keyboard>
 		<default/>
+		<numlock>on</numlock>
 		<keybind key="C-A-Delete">
 			<action name="Execute" command="~/.config/labwc/logout_tofi.sh"/>
 		</keybind>
@@ -105,6 +117,9 @@
 		<keybind key="F11">
 			<action name="ToggleFullscreen"/>
 		</keybind>
+		<keybind key="F12">
+			<action name="ToggleDecorations"/>
+		</keybind>		
 		<!-- Program shortcuts -->
 		<keybind key="W-Space">
 			<!-- <action name="Execute" command="tofi-drun - -drun-launch=true"/> --> 
@@ -133,6 +148,18 @@
 			<action name="ShowMenu" menu="interaction-menu"/>
 		</keybind>
 	</keyboard>
+
+	<windowRules>
+		<windowRule title="popup">
+			<action name="SetDecorations" decorations="border"/>
+			<action name="If">
+				<query focused="no"/>
+				<then><action name="Close"/></then>
+				<else><action/></else>
+			</action>
+		</windowRule>
+	</windowRules>
+
 	<mouse>
 		<default/>
 		<!-- <scrollFactor>2</scrollFactor> -->
@@ -154,12 +181,15 @@
 			</mousebind>
 		</context>
 	</mouse>
+
 	<tablet mapToOutput="HDMI-A-1" mouseEmulation="no"/>
+
 	<libinput>
 		<device category="touchpad">
 			<pointerSpeed>0.15</pointerSpeed>
 			<naturalScroll>yes</naturalScroll>
-			<scrollFactor>0.6</scrollFactor>
+			<scrollFactor>0.35</scrollFactor>
+			<threeFingerDrag>no</threeFingerDrag>
 		</device>
 		<device category="non-touch">
 			<naturalScroll>no</naturalScroll>
@@ -168,7 +198,8 @@
 			<accelProfile>flat</accelProfile>
 			<disableWhileTyping>no</disableWhileTyping>
 			<calibrationMatrix/>
-			<scrollFactor>1.3</scrollFactor>
+			<scrollFactor>1.0</scrollFactor>
 		</device>
 	</libinput>
+
 </labwc_config>

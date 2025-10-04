@@ -1,0 +1,40 @@
+unbind-key -a
+unbind-key C-b
+set -g prefix C-Space
+bind-key C-Space send-prefix
+
+bind-key -n M-Left select-pane -L
+bind-key -n M-Right select-pane -R
+bind-key -n M-Up select-pane -U
+bind-key -n M-Down select-pane -D
+bind-key -n C-q kill-pane
+
+unbind-key r
+#bind-key r resize-pane -L
+# Attiva la modalità di ridimensionamento
+#bind-key r setw -g mode-keys vi \; setw -g status-style fg=yellow
+# Definisci un binding specifico per la modalità di ridimensionamento
+#bind-key -t vi-copy H resize-pane -L 5
+#bind-key -t vi-copy J resize-pane -D 5
+#bind-key -t vi-copy K resize-pane -U 5
+#bind-key -t vi-copy L resize-pane -R 5
+# Esci dalla modalità di ridimensionamento con "q"
+#bind-key -T vi-copy q clear-history \; setw -g mode-keys emacs \; setw -g status-style default
+
+
+# More friendly split pane
+#bind-key h split-window -h
+#bind-key v split-window -v
+bind-key -n C-h split-window -h
+bind-key -n C-v split-window -v
+
+unbind-key n
+bind-key -n C-n new-window
+unbind-key & 
+bind-key -n C-S-q kill-window
+bind-key -n C-PageUp previous-window
+bind-key -n C-PageDown next-window
+
+set -g mouse on
+set -g history-limit 2000
+
